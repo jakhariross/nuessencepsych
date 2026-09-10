@@ -163,7 +163,8 @@ body {
 }
 
 /* =========================================================
-   7-SECOND ORBIT
+   GOLD LIGHT MOVEMENT
+   One complete subtle orbit every 7 seconds.
    ========================================================= */
 
 @keyframes nu-orbit-light {
@@ -176,6 +177,13 @@ body {
   }
 }
 
+
+/* Stop animation for visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-glow {
+    animation: none;
+  }
+}
 /* =========================================================
    ACCESSIBILITY
    ========================================================= */
