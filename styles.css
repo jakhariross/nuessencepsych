@@ -1,0 +1,168 @@
+/* =========================================================
+   NU ESSENCE — HERO STARTER
+   Static background + rotating gold LIGHT ONLY
+   Full light orbit: every 7 seconds
+   ========================================================= */
+
+:root {
+  --nu-black: #090b0d;
+  --nu-ivory: #f5efe5;
+  --nu-gold: 196, 142, 64;
+  --nu-gold-soft: 226, 176, 94;
+  --nu-gold-bright: 255, 229, 169;
+
+  /*
+    Position of the ring in the supplied 1536 × 1024 artwork.
+    These percentage values keep the glow centered on the
+    existing static ring while the hero scales proportionally.
+  */
+  --orbit-x: 56.9%;
+  --orbit-y: 37.4%;
+  --orbit-size: 21.7%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--nu-black);
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ---------------------------------------------------------
+   HERO
+   The supplied artwork is 3:2. Keeping the same aspect ratio
+   preserves exact alignment between the background ring and
+   the CSS light overlay.
+   --------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  isolation: isolate;
+
+  background-image: url("assets/nu-essence-hero-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* Content will sit above the glow whenever you add it. */
+.hero-content {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------------------------------------------------
+   ROTATING LIGHT
+   Important:
+   - The static ring in the IMAGE does not move.
+   - This overlay rotates.
+   - Because only a short arc is bright, it reads as light
+     traveling around polished gold rather than a spinning ring.
+   --------------------------------------------------------- */
+
+.orbit-glow {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+
+  left: var(--orbit-x);
+  top: var(--orbit-y);
+  width: var(--orbit-size);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  /* The bright region occupies only a small part of the circle. */
+  background: conic-gradient(
+    from 0deg,
+    rgba(var(--nu-gold), 0.00) 0deg,
+    rgba(var(--nu-gold), 0.00) 278deg,
+    rgba(var(--nu-gold-soft), 0.10) 292deg,
+    rgba(var(--nu-gold-soft), 0.34) 306deg,
+    rgba(var(--nu-gold-bright), 0.95) 320deg,
+    rgba(255, 249, 225, 1.00) 326deg,
+    rgba(var(--nu-gold-bright), 0.72) 333deg,
+    rgba(var(--nu-gold-soft), 0.20) 344deg,
+    rgba(var(--nu-gold), 0.00) 360deg
+  );
+
+  /*
+    Mask out the center and leave only a thin outer light band.
+    Increase 7px/8px below if you want a thicker glow.
+  */
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 9px),
+    #000 calc(100% - 8px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 9px),
+    #000 calc(100% - 8px)
+  );
+
+  filter:
+    blur(0.7px)
+    drop-shadow(0 0 5px rgba(var(--nu-gold-bright), 0.50))
+    drop-shadow(0 0 12px rgba(var(--nu-gold-soft), 0.30))
+    drop-shadow(0 0 22px rgba(var(--nu-gold), 0.14));
+
+  animation: nu-orbit-light 7s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/*
+  translate(-50%, -50%) must remain in BOTH keyframes so the
+  ring stays centered while it rotates.
+*/
+@keyframes nu-orbit-light {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Accessibility: respect visitors who request less motion. */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-glow {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   TEMPORARY MOBILE FALLBACK
+   The final mobile composition should be adjusted after the
+   mobile layout is approved. This keeps the current art usable.
+   --------------------------------------------------------- */
+@media (max-width: 700px) {
+  .hero {
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+
+  .orbit-glow {
+    /* Slightly soften the effect on small screens. */
+    filter:
+      blur(0.6px)
+      drop-shadow(0 0 4px rgba(var(--nu-gold-bright), 0.42))
+      drop-shadow(0 0 10px rgba(var(--nu-gold-soft), 0.22));
+  }
+}
