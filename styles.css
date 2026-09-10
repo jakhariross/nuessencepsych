@@ -277,16 +277,47 @@ body {
 .spark {
   position: absolute;
 
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 
   border-radius: 50%;
 
   background: var(--nu-gold);
 
-  opacity: 0.18;
+  opacity: 0.08;
 
-  transform: translate(-50%, -50%) scale(0.75);
+  transform:
+    translate(-50%, -50%)
+    scale(0.75);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* =========================================================
+   RANDOM ACTIVE GOLD REFLECTION
+   JavaScript adds/removes .is-shining
+   ========================================================= */
+
+.spark.is-shining {
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.3);
+
+  background: #fffdf2;
+
+  box-shadow:
+    0 0 2px rgba(255, 255, 255, 1),
+    0 0 6px rgba(255, 242, 195, 0.95),
+    0 0 12px rgba(242, 197, 111, 0.70),
+    0 0 20px rgba(212, 160, 74, 0.30);
+}
 
   /* --spark-duration / --spark-delay default to the original fixed
      7s round-robin; script.js overrides them per-spark on load for
@@ -388,16 +419,23 @@ body {
 .spark::before,
 .spark::after {
   content: "";
+
   position: absolute;
+
   left: 50%;
   top: 50%;
-  background: rgba(255, 250, 225, 0.95);
+
+  background: rgba(255, 250, 225, 0.98);
+
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
-  /* inherits --spark-duration / --spark-delay from the parent .spark,
-     so it always stays in sync with that spark's twinkle timing */
-  animation: nu-star-flare var(--spark-duration, 7s) ease-in-out infinite;
-  animation-delay: var(--spark-delay, 0s);
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .spark::before {
@@ -410,33 +448,20 @@ body {
   height: 16px;
 }
 
+.spark.is-shining::before,
+.spark.is-shining::after {
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
 
 /* =========================================================
    STAR FLARE ANIMATION
    ========================================================= */
 
-@keyframes nu-star-flare {
-  0%, 77%, 100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  81% {
-    opacity: 0.30;
-    transform: translate(-50%, -50%) scale(0.40);
-  }
-  83% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  86% {
-    opacity: 0.35;
-    transform: translate(-50%, -50%) scale(0.60);
-  }
-  91% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-}
+
 
 
 /* =========================================================
