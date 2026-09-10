@@ -1,47 +1,71 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
   <meta
     name="description"
     content="Nu Essence Psychiatry — modern, compassionate psychiatric care."
   />
+
   <title>Nu Essence Psychiatry</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  />
 </head>
+
 <body>
 
-  <!--
-    HERO BACKGROUND
-    The background image already contains the static circular gold ring.
-    The .orbit-glow element adds ONLY a moving highlight over that ring.
-    The background image itself never rotates.
-  -->
   <header class="hero">
 
-    <!-- Main gold-ring shine -->
-  <div class="ring-shine" aria-hidden="true"></div>
+    <!--
+      Overlay matches the hero artwork.
+      The gold ring itself is part of the background image
+      and always remains visible.
+    -->
+    <div
+      class="hero-art-overlay"
+      aria-hidden="true"
+    >
 
-     <!-- Secondary twinkle points -->
-  <div class="orbit-glow" aria-hidden="true">
-  <span class="spark spark-1"></span>
-  <span class="spark spark-2"></span>
-  <span class="spark spark-3"></span>
-  <span class="spark spark-4"></span>
-  <span class="spark spark-5"></span>
-  <span class="spark spark-6"></span>
-  <span class="spark spark-7"></span>
-  <span class="spark spark-8"></span>
-</div>
-    <!-- Add navigation / copy here once the site tabs are finalized. -->
-    <div class="hero-content">
-      <!-- Example:
-      <h1>Clarity for today.<br>Strength for life.</h1>
+      <!--
+        These fixed points sit on the gold ring.
+        JavaScript randomly chooses which one twinkles.
       -->
+      <div class="orbit-glow">
+
+        <span class="spark spark-1"></span>
+        <span class="spark spark-2"></span>
+        <span class="spark spark-3"></span>
+        <span class="spark spark-4"></span>
+        <span class="spark spark-5"></span>
+        <span class="spark spark-6"></span>
+        <span class="spark spark-7"></span>
+        <span class="spark spark-8"></span>
+
+      </div>
+
     </div>
+
+
+    <!-- Future homepage content -->
+    <div class="hero-content">
+    </div>
+
   </header>
 
+
+  <!-- Main random sparkle controller -->
   <script src="script.js"></script>
+
 </body>
+
 </html>
