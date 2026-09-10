@@ -1,21 +1,17 @@
 /* =========================================================
-   NU ESSENCE — HERO STARTER
-   Static background + rotating gold LIGHT ONLY
-   Full light orbit: every 7 seconds
+   NU ESSENCE — HERO + SUBTLE ROTATING GOLD GLOW
+   Background stays still. Only the light reflection rotates.
    ========================================================= */
 
 :root {
   --nu-black: #090b0d;
   --nu-ivory: #f5efe5;
-  --nu-gold: 196, 142, 64;
-  --nu-gold-soft: 226, 176, 94;
-  --nu-gold-bright: 255, 229, 169;
 
-  /*
-    Position of the ring in the supplied 1536 × 1024 artwork.
-    These percentage values keep the glow centered on the
-    existing static ring while the hero scales proportionally.
-  */
+  --nu-gold: 212, 160, 74;
+  --nu-gold-soft: 242, 197, 111;
+  --nu-gold-bright: 255, 240, 195;
+
+  /* Alignment for the approved 1536 × 1024 background image */
   --orbit-x: 56.9%;
   --orbit-y: 37.4%;
   --orbit-size: 21.7%;
@@ -31,19 +27,16 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--nu-black);
 }
 
 body {
+  background: var(--nu-black);
   font-family: Georgia, "Times New Roman", serif;
 }
 
-/* ---------------------------------------------------------
+/* =========================================================
    HERO
-   The supplied artwork is 3:2. Keeping the same aspect ratio
-   preserves exact alignment between the background ring and
-   the CSS light overlay.
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .hero {
   position: relative;
@@ -58,7 +51,6 @@ body {
   background-size: 100% 100%;
 }
 
-/* Content will sit above the glow whenever you add it. */
 .hero-content {
   position: relative;
   z-index: 4;
@@ -66,83 +58,13 @@ body {
   height: 100%;
 }
 
-/* ---------------------------------------------------------
-   ROTATING LIGHT
-   Important:
-   - The static ring in the IMAGE does not move.
-   - This overlay rotates.
-   - Because only a short arc is bright, it reads as light
-     traveling around polished gold rather than a spinning ring.
-   --------------------------------------------------------- */
+/* =========================================================
+   ROTATING GOLD LIGHT
+   The circle in the PNG does NOT move.
+   Only this small highlight travels around the edge.
+   ========================================================= */
 
-.-glow {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-
-  left: var(---x);
-  top: var(---y);
-  width: var(--orbit-size);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-
-  /* The bright region occupies only a small part of the circle. */
-  background: conic-gradient(
-    from 0deg,
-    rgba(var(--nu-gold), 0.00) 0deg,
-    rgba(var(--nu-gold), 0.00) 278deg,
-    rgba(var(--nu-gold-soft), 0.10) 292deg,
-    rgba(var(--nu-gold-soft), 0.34) 306deg,
-    rgba(var(--nu-gold-bright), 0.95) 320deg,
-    rgba(255, 249, 225, 1.00) 326deg,
-    rgba(var(--nu-gold-bright), 0.72) 333deg,
-    rgba(var(--nu-gold-soft), 0.20) 344deg,
-    rgba(var(--nu-gold), 0.00) 360deg
-  );
-
-  /*
-    Mask out the center and leave only a thin outer light band.
-    Increase 7px/8px below if you want a thicker glow.
-  */
-  -webkit-mask: radial-gradient(
-    farthest-side,
-    transparent calc(100% - 9px),
-    #000 calc(100% - 8px)
-  );
-  mask: radial-gradient(
-    farthest-side,
-    transparent calc(100% - 9px),
-    #000 calc(100% - 8px)
-  );
-
-  filter:
-    blur(0.7px)
-    drop-shadow(0 0 5px rgba(var(--nu-gold-bright), 0.50))
-    drop-shadow(0 0 12px rgba(var(--nu-gold-soft), 0.30))
-    drop-shadow(0 0 22px rgba(var(--nu-gold), 0.14));
-
-  animation: nu-orbit-light 7s linear infinite;
-  transform-origin: center;
-  will-change: transform;
-}
-
-/*
-  translate(-50%, -50%) must remain in BOTH keyframes so the
-  ring stays centered while it rotates.
-*/
-@keyframes nu-orbit-light {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* Accessibility: respect visitors who request less motion. */
-@media (prefers-reduced-motion: reduce) {
-  .orbit-glow {
+.orbit-glow {
   position: absolute;
   z-index: 3;
   pointer-events: none;
@@ -151,27 +73,28 @@ body {
   top: var(--orbit-y);
   width: var(--orbit-size);
   aspect-ratio: 1;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
 
-  /* Only a tiny section of light */
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform;
+
+  /* Tiny light sweep rather than a large crescent */
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 322deg,
-    rgba(212, 160, 74, 0.05) 330deg,
-    rgba(242, 197, 111, 0.28) 337deg,
-    rgba(255, 240, 195, 0.92) 343deg,
-    rgba(255, 255, 245, 1) 346deg,
-    rgba(244, 205, 125, 0.42) 350deg,
-    rgba(212, 160, 74, 0.08) 355deg,
+    transparent 324deg,
+    rgba(var(--nu-gold), 0.03) 330deg,
+    rgba(var(--nu-gold-soft), 0.18) 336deg,
+    rgba(var(--nu-gold-bright), 0.72) 341deg,
+    rgba(255, 255, 245, 1) 345deg,
+    rgba(var(--nu-gold-bright), 0.72) 348deg,
+    rgba(var(--nu-gold-soft), 0.18) 353deg,
+    rgba(var(--nu-gold), 0.03) 357deg,
     transparent 360deg
   );
 
-  /*
-    Keep ONLY the extreme outside edge.
-    This prevents the crescent from entering the black center.
-  */
+  /* Keep the glow only on the outside edge */
   -webkit-mask: radial-gradient(
     circle,
     transparent 0%,
@@ -189,14 +112,16 @@ body {
   );
 
   filter:
-    blur(0.35px)
-    drop-shadow(0 0 3px rgba(255, 229, 155, 0.55))
-    drop-shadow(0 0 7px rgba(218, 164, 76, 0.25));
+    blur(0.3px)
+    drop-shadow(0 0 3px rgba(var(--nu-gold-bright), 0.50))
+    drop-shadow(0 0 7px rgba(var(--nu-gold), 0.20));
 
   animation: nu-orbit-light 7s linear infinite;
-  transform-origin: center;
-  will-change: transform;
 }
+
+/* =========================================================
+   7-SECOND ORBIT
+   ========================================================= */
 
 @keyframes nu-orbit-light {
   from {
@@ -205,5 +130,33 @@ body {
 
   to {
     transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-glow {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   Temporary until the dedicated mobile design is finalized.
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .hero {
+    aspect-ratio: 3 / 2;
+  }
+
+  .orbit-glow {
+    filter:
+      blur(0.25px)
+      drop-shadow(0 0 2px rgba(var(--nu-gold-bright), 0.42))
+      drop-shadow(0 0 5px rgba(var(--nu-gold), 0.16));
   }
 }
