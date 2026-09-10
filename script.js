@@ -1,15 +1,15 @@
 /* =========================================================
    NU ESSENCE — RANDOM GOLD RING TWINKLES
 
-   The gold ring itself is part of the background image
-   and never moves.
+   The gold ring itself never moves.
 
-   These sparks sit at fixed positions on the gold ring.
-   JavaScript randomly selects individual points to brighten,
-   sparkle, then fade back down.
+   Eight fixed points sit directly on the ring.
 
-   The result should feel like polished gold catching light,
-   NOT like lights rotating in sequence.
+   JavaScript randomly chooses which point catches the light,
+   makes it shine briefly, then fades it back into the gold.
+
+   There is NO clockwise sequence.
+   There is NO rotation.
    ========================================================= */
 
 (function () {
@@ -18,18 +18,22 @@
     document.querySelectorAll(".orbit-glow .spark")
   );
 
-  if (!sparks.length) return;
+
+  if (!sparks.length) {
+    return;
+  }
 
 
   /* =======================================================
      ACCESSIBILITY
      ======================================================= */
 
-  const reduceMotion = window.matchMedia(
+  const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   );
 
-  if (reduceMotion.matches) {
+
+  if (reducedMotion.matches) {
     return;
   }
 
@@ -38,72 +42,141 @@
      SETTINGS
      ======================================================= */
 
-  const MIN_WAIT = 700;
-  const MAX_WAIT = 2600;
+  /*
+    Delay between twinkles.
 
-  const MIN_SHINE = 300;
-  const MAX_SHINE = 850;
+    Example:
+    one sparkle happens,
+    then approximately 0.8–3 seconds before another.
+  */
+
+  const MIN_WAIT = 800;
+  const MAX_WAIT = 3000;
+
 
   /*
-    Chance that a second sparkle appears shortly after
-    the first one.
-
-    0.20 = approximately 20% of the time.
+    How long one reflection remains bright.
   */
-  const DOUBLE_SPARK_CHANCE = 0.20;
+
+  const MIN_SHINE = 280;
+  const MAX_SHINE = 750;
+
+
+  /*
+    Occasionally allow a second location to catch
+    the light shortly after the first.
+
+    0.18 = 18% chance.
+  */
+
+  const DOUBLE_SPARK_CHANCE = 0.18;
+
+
+  /*
+    Very rarely create a stronger jewelry-like twinkle.
+  */
+
+  const STRONG_SPARK_CHANCE = 0.20;
 
 
   /* =======================================================
-     HELPERS
+     UTILITIES
      ======================================================= */
 
   function randomBetween(min, max) {
-    return Math.random() * (max - min) + min;
+
+    return (
+      Math.random() *
+      (max - min) +
+      min
+    );
+
   }
 
 
-  function randomSpark(exclude = null) {
+  function randomSpark(exclude) {
 
-    let choices = sparks.filter(function (spark) {
-      return spark !== exclude;
-    });
+    const available = sparks.filter(
+      function (spark) {
+        return spark !== exclude;
+      }
+    );
 
-    return choices[
-      Math.floor(Math.random() * choices.length)
+
+    return available[
+      Math.floor(
+        Math.random() *
+        available.length
+      )
     ];
+
   }
 
 
   /* =======================================================
-     MAKE ONE POINT SHINE
+     SHINE ONE LOCATION
      ======================================================= */
 
   function shine(spark) {
 
-    if (!spark) return;
+    if (!spark) {
+      return;
+    }
+
 
     /*
-      Remove first in case that point was recently active.
-      This lets the animation restart cleanly.
+      Restart cleanly if this sparkle happened recently.
     */
-    spark.classList.remove("is-shining");
 
-    void spark.offsetWidth;
-
-    spark.classList.add("is-shining");
-
-
-    const shineTime = randomBetween(
-      MIN_SHINE,
-      MAX_SHINE
+    spark.classList.remove(
+      "is-shining",
+      "is-strong"
     );
 
 
-    window.setTimeout(function () {
+    void spark.offsetWidth;
 
-      spark.classList.remove("is-shining");
 
-    }, shineTime);
+    spark.classList.add(
+      "is-shining"
+    );
+
+
+    /*
+      Occasionally boost the intensity slightly.
+    */
+
+    if (
+      Math.random() <
+      STRONG_SPARK_CHANCE
+    ) {
+
+      spark.classList.add(
+        "is-strong"
+      );
+
+    }
+
+
+    const shineTime =
+      randomBetween(
+        MIN_SHINE,
+        MAX_SHINE
+      );
+
+
+    window.setTimeout(
+      function () {
+
+        spark.classList.remove(
+          "is-shining",
+          "is-strong"
+        );
+
+      },
+
+      shineTime
+    );
 
   }
 
@@ -117,51 +190,86 @@
 
   function scheduleNextSpark() {
 
-    const waitTime = randomBetween(
-      MIN_WAIT,
-      MAX_WAIT
-    );
+    const waitTime =
+      randomBetween(
+        MIN_WAIT,
+        MAX_WAIT
+      );
 
 
-    window.setTimeout(function () {
+    window.setTimeout(
+      function () {
 
-      /*
-        Usually don't select the exact same sparkle
-        two times in a row.
-      */
-      const selectedSpark = randomSpark(previousSpark);
+        /*
+          Pick a random sparkle.
 
-      shine(selectedSpark);
+          Avoid using the exact same location
+          twice in a row.
+        */
 
-      previousSpark = selectedSpark;
+        const selectedSpark =
+          randomSpark(
+            previousSpark
+          );
 
 
-      /*
-        Occasionally let another point catch the light
-        shortly after the first.
-
-        This keeps the effect from feeling mechanically
-        one-at-a-time.
-      */
-      if (Math.random() < DOUBLE_SPARK_CHANCE) {
-
-        const secondSpark = randomSpark(selectedSpark);
-
-        const secondDelay = randomBetween(
-          120,
-          500
+        shine(
+          selectedSpark
         );
 
-        window.setTimeout(function () {
-          shine(secondSpark);
-        }, secondDelay);
 
-      }
+        previousSpark =
+          selectedSpark;
 
 
-      scheduleNextSpark();
+        /*
+          Occasionally another part of the ring
+          catches the light shortly afterward.
+        */
 
-    }, waitTime);
+        if (
+          Math.random() <
+          DOUBLE_SPARK_CHANCE
+        ) {
+
+          const secondSpark =
+            randomSpark(
+              selectedSpark
+            );
+
+
+          const secondDelay =
+            randomBetween(
+              140,
+              500
+            );
+
+
+          window.setTimeout(
+            function () {
+
+              shine(
+                secondSpark
+              );
+
+            },
+
+            secondDelay
+          );
+
+        }
+
+
+        /*
+          Schedule another completely random event.
+        */
+
+        scheduleNextSpark();
+
+      },
+
+      waitTime
+    );
 
   }
 
