@@ -234,13 +234,7 @@ body {
    ACCESSIBILITY
    ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
 
-  .orbit-glow {
-    animation: none;
-  }
-
-}
 
 
 /* =========================================================
