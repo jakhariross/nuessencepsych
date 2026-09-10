@@ -41,14 +41,15 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  min-height: 100vh;
   overflow: hidden;
   isolation: isolate;
 
   background-image: url("nu-essence-hero-background.png");
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+  background-position: center top;
+  background-size: contain;
+  background-color: #090b0d;
 }
 
 .hero-content {
