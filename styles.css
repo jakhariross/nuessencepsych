@@ -75,25 +75,24 @@ body {
 .orbit-glow {
   position: absolute;
   z-index: 3;
-
   pointer-events: none;
 
   left: var(--orbit-x);
   top: var(--orbit-y);
-
   width: var(--orbit-size);
   aspect-ratio: 1;
-
   border-radius: 50%;
 
-  transform: translate(-50%, -50%);
-  transform-origin: center;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: 50% 50%;
+
+  animation-name: nu-orbit-light;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 
   will-change: transform;
-
-  animation: nu-orbit-light 7s linear infinite;
 }
-
 
 /* =========================================================
    SMALL BRIGHT REFLECTION
@@ -101,30 +100,20 @@ body {
 
 .orbit-glow::before {
   content: "";
-
   position: absolute;
   inset: 0;
-
   border-radius: 50%;
 
   background: conic-gradient(
     from 0deg,
-
     transparent 0deg,
-    transparent 342deg,
-
-    rgba(230, 180, 95, 0.05) 346deg,
-
-    rgba(245, 205, 125, 0.22) 349deg,
-
-    rgba(255, 241, 195, 0.72) 352deg,
-
-    rgba(255, 255, 245, 1) 354deg,
-
-    rgba(255, 235, 175, 0.55) 356deg,
-
-    rgba(225, 170, 80, 0.12) 358deg,
-
+    transparent 338deg,
+    rgba(212, 160, 74, 0.10) 343deg,
+    rgba(245, 205, 125, 0.45) 348deg,
+    rgba(255, 245, 210, 1) 352deg,
+    rgba(255, 255, 255, 1) 354deg,
+    rgba(255, 235, 175, 0.65) 356deg,
+    rgba(212, 160, 74, 0.10) 359deg,
     transparent 360deg
   );
 
@@ -134,30 +123,23 @@ body {
   */
   -webkit-mask: radial-gradient(
     circle,
-    transparent calc(100% - 4px),
-    #000 calc(100% - 3px),
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px),
     #000 100%
   );
 
   mask: radial-gradient(
     circle,
-    transparent calc(100% - 4px),
-    #000 calc(100% - 3px),
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px),
     #000 100%
   );
 
   filter:
-    blur(0.2px)
-    drop-shadow(
-      0 0 2px
-      rgba(255, 240, 190, 0.45)
-    )
-    drop-shadow(
-      0 0 5px
-      rgba(218, 164, 76, 0.18)
-    );
+    blur(0.35px)
+    drop-shadow(0 0 4px rgba(255, 235, 175, 0.70))
+    drop-shadow(0 0 10px rgba(212, 160, 74, 0.30));
 }
-
 
 /* =========================================================
    SOFT OUTER BLOOM
@@ -214,21 +196,14 @@ body {
    ========================================================= */
 
 @keyframes nu-orbit-light {
-
-  from {
-    transform:
-      translate(-50%, -50%)
-      rotate(0deg);
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
-  to {
-    transform:
-      translate(-50%, -50%)
-      rotate(360deg);
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
-
 }
-
 
 /* =========================================================
    ACCESSIBILITY
