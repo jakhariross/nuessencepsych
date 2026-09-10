@@ -142,51 +142,117 @@ body {
 }
 
 /* =========================================================
-   SOFT OUTER BLOOM
+   NU ESSENCE — MOVING GOLD REFLECTION
+   The background and gold ring remain completely stationary.
+   Only a small light reflection travels around the ring.
+   ========================================================= */
+
+.orbit-glow {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+
+  left: var(--orbit-x);
+  top: var(--orbit-y);
+
+  width: var(--orbit-size);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: center center;
+
+  animation: nu-orbit-light 7s linear infinite;
+}
+
+
+/* =========================================================
+   THE ACTUAL LIGHT
+   ========================================================= */
+
+.orbit-glow::before {
+  content: "";
+
+  position: absolute;
+
+  /* Places the highlight at the top edge of the invisible circle */
+  top: -4px;
+  left: 50%;
+
+  width: 14px;
+  height: 8px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 245, 1) 0%,
+    rgba(255, 241, 195, 0.95) 18%,
+    rgba(242, 197, 111, 0.65) 38%,
+    rgba(212, 160, 74, 0.30) 60%,
+    rgba(212, 160, 74, 0.08) 78%,
+    transparent 100%
+  );
+
+  filter:
+    blur(0.4px)
+    drop-shadow(0 0 3px rgba(255, 239, 190, 0.65))
+    drop-shadow(0 0 7px rgba(218, 164, 76, 0.30));
+}
+
+
+/* =========================================================
+   SECONDARY SOFT HALO
    ========================================================= */
 
 .orbit-glow::after {
   content: "";
 
   position: absolute;
-  inset: -1px;
+
+  top: -8px;
+  left: 50%;
+
+  width: 24px;
+  height: 14px;
+
+  transform: translateX(-50%);
 
   border-radius: 50%;
 
-  opacity: 0.30;
-
-  background: conic-gradient(
-    from 0deg,
-
-    transparent 0deg,
-    transparent 346deg,
-
-    rgba(242, 197, 111, 0.06) 350deg,
-
-    rgba(255, 230, 170, 0.20) 353deg,
-
-    rgba(255, 245, 210, 0.30) 355deg,
-
-    rgba(242, 197, 111, 0.08) 358deg,
-
-    transparent 360deg
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 230, 170, 0.20) 0%,
+    rgba(218, 164, 76, 0.10) 45%,
+    transparent 75%
   );
 
-  -webkit-mask: radial-gradient(
-    circle,
-    transparent calc(100% - 7px),
-    #000 calc(100% - 5px),
-    transparent 100%
-  );
+  filter: blur(4px);
+}
 
-  mask: radial-gradient(
-    circle,
-    transparent calc(100% - 7px),
-    #000 calc(100% - 5px),
-    transparent 100%
-  );
 
-  filter: blur(3px);
+/* =========================================================
+   MOVEMENT
+   One full orbit every 7 seconds
+   ========================================================= */
+
+@keyframes nu-orbit-light {
+
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+
 }
 
 
