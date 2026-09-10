@@ -12,10 +12,10 @@
   --nu-gold-bright: #fff0c3;
   --nu-white-gold: #fffdf2;
 
-  /* Main gold ring alignment */
-  --orbit-x: 54.8%;
-  --orbit-y: 36.5%;
-  --orbit-size: 21.2%;
+  /* Actual gold ring location in the source artwork */
+  --orbit-x: 53.1%;
+  --orbit-y: 41.2%;
+  --orbit-size: 19.3%;
 }
 
 /* =========================================================
@@ -72,13 +72,16 @@ body {
   left: 50%;
   top: 50%;
 
+  /*
+    Must match the ACTUAL background image proportions:
+    1672 × 941
+  */
   width: 98%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 1672 / 941;
 
   transform: translate(-50%, -50%);
 
   pointer-events: none;
-
   z-index: 3;
 }
 
@@ -152,44 +155,43 @@ body {
 
 .spark-1 {
   left: 50%;
-  top: 1%;
+  top: 0%;
 }
 
 .spark-2 {
-  left: 77%;
-  top: 8%;
+  left: 76%;
+  top: 7%;
 }
 
 .spark-3 {
-  left: 98%;
-  top: 42%;
+  left: 94%;
+  top: 27%;
 }
 
 .spark-4 {
-  left: 91%;
-  top: 72%;
+  left: 100%;
+  top: 50%;
 }
 
 .spark-5 {
-  left: 55%;
-  top: 99%;
+  left: 82%;
+  top: 84%;
 }
 
 .spark-6 {
-  left: 21%;
-  top: 88%;
+  left: 50%;
+  top: 100%;
 }
 
 .spark-7 {
-  left: 1%;
-  top: 52%;
+  left: 0%;
+  top: 50%;
 }
 
 .spark-8 {
-  left: 17%;
-  top: 17%;
+  left: 18%;
+  top: 16%;
 }
-
 /* =========================================================
    ACTIVE GOLD REFLECTION
    ========================================================= */
