@@ -75,13 +75,13 @@ body {
      traveling around polished gold rather than a spinning ring.
    --------------------------------------------------------- */
 
-.orbit-glow {
+.-glow {
   position: absolute;
   z-index: 3;
   pointer-events: none;
 
-  left: var(--orbit-x);
-  top: var(--orbit-y);
+  left: var(---x);
+  top: var(---y);
   width: var(--orbit-size);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
@@ -143,26 +143,67 @@ body {
 /* Accessibility: respect visitors who request less motion. */
 @media (prefers-reduced-motion: reduce) {
   .orbit-glow {
-    animation: none;
-  }
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+
+  left: var(--orbit-x);
+  top: var(--orbit-y);
+  width: var(--orbit-size);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+
+  /* Only a tiny section of light */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 322deg,
+    rgba(212, 160, 74, 0.05) 330deg,
+    rgba(242, 197, 111, 0.28) 337deg,
+    rgba(255, 240, 195, 0.92) 343deg,
+    rgba(255, 255, 245, 1) 346deg,
+    rgba(244, 205, 125, 0.42) 350deg,
+    rgba(212, 160, 74, 0.08) 355deg,
+    transparent 360deg
+  );
+
+  /*
+    Keep ONLY the extreme outside edge.
+    This prevents the crescent from entering the black center.
+  */
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent 0%,
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px),
+    #000 100%
+  );
+
+  mask: radial-gradient(
+    circle,
+    transparent 0%,
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px),
+    #000 100%
+  );
+
+  filter:
+    blur(0.35px)
+    drop-shadow(0 0 3px rgba(255, 229, 155, 0.55))
+    drop-shadow(0 0 7px rgba(218, 164, 76, 0.25));
+
+  animation: nu-orbit-light 7s linear infinite;
+  transform-origin: center;
+  will-change: transform;
 }
 
-/* ---------------------------------------------------------
-   TEMPORARY MOBILE FALLBACK
-   The final mobile composition should be adjusted after the
-   mobile layout is approved. This keeps the current art usable.
-   --------------------------------------------------------- */
-@media (max-width: 700px) {
-  .hero {
-    aspect-ratio: 3 / 2;
-    min-height: 0;
+@keyframes nu-orbit-light {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
-  .orbit-glow {
-    /* Slightly soften the effect on small screens. */
-    filter:
-      blur(0.6px)
-      drop-shadow(0 0 4px rgba(var(--nu-gold-bright), 0.42))
-      drop-shadow(0 0 10px rgba(var(--nu-gold-soft), 0.22));
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
