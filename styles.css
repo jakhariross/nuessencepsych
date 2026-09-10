@@ -71,19 +71,11 @@ body {
   background-image: url("nu-essence-hero-background.png");
   background-repeat: no-repeat;
 
-  /*
-    This is the sizing we settled on:
-    nearly the entire composition is visible without
-    the page feeling overly zoomed.
-  */
   background-size: 98% auto;
   background-position: center center;
 
   background-color: var(--nu-black);
 }
-
-
-/* Future page content sits above decorative effects */
 
 .hero-content {
   position: relative;
@@ -94,9 +86,6 @@ body {
 }
 
 
-
-
-
 /* =========================================================
    MAIN GOLD RING SHINE
    The existing ring stays still.
@@ -104,6 +93,11 @@ body {
    ========================================================= */
 
 .ring-shine {
+  /* Hidden for now — the random .ring-glints below replace it.
+     Remove this line (and re-enable the rotation animation above)
+     to bring back the rotating sweep instead. */
+  display: none;
+
   position: absolute;
   z-index: 4;
   pointer-events: none;
@@ -119,7 +113,21 @@ body {
   transform: translate(-50%, -50%) rotate(0deg);
   transform-origin: center;
 
-  animation: ring-shine-rotate 7s linear infinite;
+  /* Rotation disabled — random glints (.ring-glints below) now
+     provide the movement instead of one highlight sweeping at a
+     constant speed. Re-enable this line if you ever want the
+     rotating sweep back instead of / alongside the glints. */
+  /* animation: ring-shine-rotate 7s linear infinite; */
+}
+
+
+@keyframes ring-shine-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 
@@ -152,7 +160,6 @@ body {
     transparent 360deg
   );
 
-  /* Keep the effect directly on the ring */
   -webkit-mask: radial-gradient(
     circle,
     transparent calc(100% - 7px),
@@ -180,59 +187,64 @@ body {
 }
 
 
-/* Tiny jewelry-style flash at peak reflection */
-.ring-shine::after {
-  content: "";
+/* =========================================================
+   RANDOM RING GLINTS
+   1–2 independent points of light that appear at a random
+   angle on the ring, hold briefly, fade out, then silently
+   jump to a new random angle — driven by ring-glints.js.
+   Reads as unpredictable light catching metal rather than a
+   single highlight sweeping at constant speed.
+   ========================================================= */
 
+.ring-glints {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+
+  left: var(--orbit-x);
+  top: var(--orbit-y);
+
+  width: var(--orbit-size);
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+}
+
+.ring-glint {
   position: absolute;
 
-  top: -4px;
+  width: 10px;
+  height: 10px;
+
   left: 50%;
+  top: 0%;
 
-  width: 12px;
-  height: 12px;
-
-  transform: translateX(-50%);
-
+  transform: translate(-50%, -50%);
   border-radius: 50%;
+
+  opacity: 0;
+  transition: opacity 1.4s ease-in-out, left 0s, top 0s;
 
   background: radial-gradient(
     circle,
-    rgba(255,255,255,1) 0%,
-    rgba(255,245,205,0.95) 20%,
-    rgba(245,205,120,0.50) 45%,
-    transparent 72%
+    rgba(255, 255, 245, 1) 0%,
+    rgba(255, 241, 195, 0.9) 25%,
+    rgba(242, 197, 111, 0.45) 55%,
+    transparent 78%
   );
 
   filter:
-    drop-shadow(
-      0 0 4px
-      rgba(255,245,210,0.85)
-    )
-    drop-shadow(
-      0 0 9px
-      rgba(220,165,75,0.40)
-    );
+    blur(0.4px)
+    drop-shadow(0 0 4px rgba(255, 239, 190, 0.65))
+    drop-shadow(0 0 9px rgba(218, 164, 76, 0.35));
 }
 
-
-@keyframes ring-shine-rotate {
-
-  from {
-    transform:
-      translate(-50%, -50%)
-      rotate(0deg);
+@media (prefers-reduced-motion: reduce) {
+  .ring-glint {
+    transition: none;
+    opacity: 0;
   }
-
-  to {
-    transform:
-      translate(-50%, -50%)
-      rotate(360deg);
-  }
-
 }
-
-
 
 
 /* =========================================================
@@ -276,11 +288,11 @@ body {
 
   transform: translate(-50%, -50%) scale(0.75);
 
-  animation:
-    nu-gold-twinkle
-    7s
-    ease-in-out
-    infinite;
+  /* --spark-duration / --spark-delay default to the original fixed
+     7s round-robin; script.js overrides them per-spark on load for
+     an organic, non-repeating twinkle instead. */
+  animation: nu-gold-twinkle var(--spark-duration, 7s) ease-in-out infinite;
+  animation-delay: var(--spark-delay, 0s);
 
   will-change:
     opacity,
@@ -291,74 +303,20 @@ body {
 
 /* =========================================================
    SPARK POSITIONS
-
-        1
-     8     2
-
-   7         3
-
-     6     4
-        5
-
-   These remain fixed.
-   Only their brightness changes.
    ========================================================= */
 
-.spark-1 {
-  left: 50%;
-  top: 0%;
-  animation-delay: 0s;
-}
-
-.spark-2 {
-  left: 85.35%;
-  top: 14.65%;
-  animation-delay: 0.875s;
-}
-
-.spark-3 {
-  left: 100%;
-  top: 50%;
-  animation-delay: 1.75s;
-}
-
-.spark-4 {
-  left: 85.35%;
-  top: 85.35%;
-  animation-delay: 2.625s;
-}
-
-.spark-5 {
-  left: 50%;
-  top: 100%;
-  animation-delay: 3.5s;
-}
-
-.spark-6 {
-  left: 14.65%;
-  top: 85.35%;
-  animation-delay: 4.375s;
-}
-
-.spark-7 {
-  left: 0%;
-  top: 50%;
-  animation-delay: 5.25s;
-}
-
-.spark-8 {
-  left: 14.65%;
-  top: 14.65%;
-  animation-delay: 6.125s;
-}
+.spark-1 { left: 50%;    top: 0%;     --spark-delay: 0s; }
+.spark-2 { left: 85.35%; top: 14.65%; --spark-delay: 0.875s; }
+.spark-3 { left: 100%;   top: 50%;    --spark-delay: 1.75s; }
+.spark-4 { left: 85.35%; top: 85.35%; --spark-delay: 2.625s; }
+.spark-5 { left: 50%;    top: 100%;   --spark-delay: 3.5s; }
+.spark-6 { left: 14.65%; top: 85.35%; --spark-delay: 4.375s; }
+.spark-7 { left: 0%;     top: 50%;    --spark-delay: 5.25s; }
+.spark-8 { left: 14.65%; top: 14.65%; --spark-delay: 6.125s; }
 
 
 /* =========================================================
    GOLD / DIAMOND-LIKE TWINKLE
-
-   Most of the time each point is nearly invisible.
-   It briefly catches a bright white-gold reflection,
-   then fades back down as the next point illuminates.
    ========================================================= */
 
 @keyframes nu-gold-twinkle {
@@ -367,60 +325,37 @@ body {
   68%,
   100% {
     opacity: 0.12;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.70);
-
+    transform: translate(-50%, -50%) scale(0.70);
     background: var(--nu-gold);
-
     box-shadow:
       0 0 0 rgba(255, 253, 242, 0),
       0 0 0 rgba(255, 240, 195, 0),
       0 0 0 rgba(212, 160, 74, 0);
   }
 
-
   74% {
     opacity: 0.32;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.85);
-
+    transform: translate(-50%, -50%) scale(0.85);
     background: var(--nu-gold-soft);
-
     box-shadow:
       0 0 3px rgba(255, 240, 195, 0.25),
       0 0 7px rgba(212, 160, 74, 0.15);
   }
 
-
   80% {
     opacity: 0.75;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-
+    transform: translate(-50%, -50%) scale(1);
     background: var(--nu-gold-bright);
-
     box-shadow:
       0 0 3px rgba(255, 253, 242, 0.65),
       0 0 7px rgba(255, 225, 155, 0.45),
       0 0 12px rgba(212, 160, 74, 0.25);
   }
 
-
   83% {
     opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1.35);
-
+    transform: translate(-50%, -50%) scale(1.35);
     background: var(--nu-white-gold);
-
     box-shadow:
       0 0 3px rgba(255, 255, 255, 1),
       0 0 7px rgba(255, 246, 210, 0.95),
@@ -428,79 +363,47 @@ body {
       0 0 22px rgba(212, 160, 74, 0.28);
   }
 
-
   87% {
     opacity: 0.62;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.95);
-
+    transform: translate(-50%, -50%) scale(0.95);
     background: var(--nu-gold-soft);
-
     box-shadow:
       0 0 3px rgba(255, 240, 195, 0.38),
       0 0 8px rgba(212, 160, 74, 0.20);
   }
 
-
   94% {
     opacity: 0.12;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.70);
-
+    transform: translate(-50%, -50%) scale(0.70);
     background: var(--nu-gold);
-
-    box-shadow:
-      none;
+    box-shadow: none;
   }
 }
 
 
 /* =========================================================
    STAR FLARE
-
-   Gives the brightest moment a polished jewelry/star glint
-   instead of just making the dot larger.
    ========================================================= */
 
 .spark::before,
 .spark::after {
   content: "";
-
   position: absolute;
-
   left: 50%;
   top: 50%;
-
-  background:
-    rgba(255, 250, 225, 0.95);
-
+  background: rgba(255, 250, 225, 0.95);
   opacity: 0;
-
-  transform:
-    translate(-50%, -50%)
-    scale(0);
-
-  animation:
-    nu-star-flare
-    7s
-    ease-in-out
-    infinite;
+  transform: translate(-50%, -50%) scale(0);
+  /* inherits --spark-duration / --spark-delay from the parent .spark,
+     so it always stays in sync with that spark's twinkle timing */
+  animation: nu-star-flare var(--spark-duration, 7s) ease-in-out infinite;
+  animation-delay: var(--spark-delay, 0s);
 }
-
-
-/* Horizontal flare */
 
 .spark::before {
   width: 16px;
   height: 1px;
 }
-
-
-/* Vertical flare */
 
 .spark::after {
   width: 1px;
@@ -509,100 +412,29 @@ body {
 
 
 /* =========================================================
-   MATCH STAR TIMING TO EACH SPARK
-   ========================================================= */
-
-.spark-1::before,
-.spark-1::after {
-  animation-delay: 0s;
-}
-
-.spark-2::before,
-.spark-2::after {
-  animation-delay: 0.875s;
-}
-
-.spark-3::before,
-.spark-3::after {
-  animation-delay: 1.75s;
-}
-
-.spark-4::before,
-.spark-4::after {
-  animation-delay: 2.625s;
-}
-
-.spark-5::before,
-.spark-5::after {
-  animation-delay: 3.5s;
-}
-
-.spark-6::before,
-.spark-6::after {
-  animation-delay: 4.375s;
-}
-
-.spark-7::before,
-.spark-7::after {
-  animation-delay: 5.25s;
-}
-
-.spark-8::before,
-.spark-8::after {
-  animation-delay: 6.125s;
-}
-
-
-/* =========================================================
    STAR FLARE ANIMATION
    ========================================================= */
 
 @keyframes nu-star-flare {
-
-  0%,
-  77%,
-  100% {
+  0%, 77%, 100% {
     opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0);
+    transform: translate(-50%, -50%) scale(0);
   }
-
-
   81% {
     opacity: 0.30;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.40);
+    transform: translate(-50%, -50%) scale(0.40);
   }
-
-
   83% {
     opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
-
-
   86% {
     opacity: 0.35;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.60);
+    transform: translate(-50%, -50%) scale(0.60);
   }
-
-
   91% {
     opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0);
+    transform: translate(-50%, -50%) scale(0);
   }
 }
 
@@ -612,20 +444,16 @@ body {
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .spark,
   .spark::before,
   .spark::after {
     animation: none;
   }
-
 }
 
 
 /* =========================================================
    MOBILE
-   Temporary treatment until we design the dedicated
-   Nu Essence mobile homepage.
    ========================================================= */
 
 @media (max-width: 700px) {
@@ -638,19 +466,14 @@ body {
     background-position: center top;
   }
 
-
-  /* Slightly smaller sparkle on small screens */
-
   .spark {
     width: 4px;
     height: 4px;
   }
 
-
   .spark::before {
     width: 11px;
   }
-
 
   .spark::after {
     height: 11px;
