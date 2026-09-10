@@ -94,6 +94,147 @@ body {
 }
 
 
+
+
+
+/* =========================================================
+   MAIN GOLD RING SHINE
+   The existing ring stays still.
+   Only the reflected gold light rotates.
+   ========================================================= */
+
+.ring-shine {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+
+  left: var(--orbit-x);
+  top: var(--orbit-y);
+
+  width: var(--orbit-size);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: center;
+
+  animation: ring-shine-rotate 7s linear infinite;
+}
+
+
+/* Bright metallic reflection */
+.ring-shine::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: 50%;
+
+  background: conic-gradient(
+    from 0deg,
+
+    transparent 0deg,
+    transparent 310deg,
+
+    rgba(210, 155, 65, 0.03) 320deg,
+    rgba(225, 175, 85, 0.12) 327deg,
+    rgba(245, 205, 120, 0.35) 334deg,
+    rgba(255, 230, 155, 0.70) 340deg,
+
+    rgba(255, 255, 245, 1) 345deg,
+
+    rgba(255, 235, 170, 0.85) 349deg,
+    rgba(238, 190, 95, 0.40) 354deg,
+    rgba(212, 160, 74, 0.08) 358deg,
+
+    transparent 360deg
+  );
+
+  /* Keep the effect directly on the ring */
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent calc(100% - 7px),
+    #000 calc(100% - 5px),
+    #000 100%
+  );
+
+  mask: radial-gradient(
+    circle,
+    transparent calc(100% - 7px),
+    #000 calc(100% - 5px),
+    #000 100%
+  );
+
+  filter:
+    blur(0.25px)
+    drop-shadow(
+      0 0 3px
+      rgba(255, 240, 195, 0.70)
+    )
+    drop-shadow(
+      0 0 7px
+      rgba(230, 175, 80, 0.35)
+    );
+}
+
+
+/* Tiny jewelry-style flash at peak reflection */
+.ring-shine::after {
+  content: "";
+
+  position: absolute;
+
+  top: -4px;
+  left: 50%;
+
+  width: 12px;
+  height: 12px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,1) 0%,
+    rgba(255,245,205,0.95) 20%,
+    rgba(245,205,120,0.50) 45%,
+    transparent 72%
+  );
+
+  filter:
+    drop-shadow(
+      0 0 4px
+      rgba(255,245,210,0.85)
+    )
+    drop-shadow(
+      0 0 9px
+      rgba(220,165,75,0.40)
+    );
+}
+
+
+@keyframes ring-shine-rotate {
+
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+
+}
+
+
+
+
 /* =========================================================
    GOLD TWINKLE CONTAINER
    THIS DOES NOT ROTATE
@@ -516,17 +657,3 @@ body {
   }
 
 }
-One HTML change is required
-
-Because this version uses the existing individual gold lights, your index.html needs this instead of the single empty glow div:
-
-<div class="orbit-glow" aria-hidden="true">
-  <span class="spark spark-1"></span>
-  <span class="spark spark-2"></span>
-  <span class="spark spark-3"></span>
-  <span class="spark spark-4"></span>
-  <span class="spark spark-5"></span>
-  <span class="spark spark-6"></span>
-  <span class="spark spark-7"></span>
-  <span class="spark spark-8"></span>
-</div>
