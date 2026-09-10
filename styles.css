@@ -1,21 +1,40 @@
 /* =========================================================
-   NU ESSENCE — HERO + SUBTLE ROTATING GOLD GLOW
-   Background stays still. Only the light reflection rotates.
+   NU ESSENCE PSYCHIATRY
+   HERO BACKGROUND + GOLD TWINKLE EFFECT
+
+   The background image stays completely still.
+   The gold circle stays completely still.
+   Individual highlights sparkle in sequence around the circle,
+   creating the illusion of reflected light moving around gold.
+   ========================================================= */
+
+
+/* =========================================================
+   BRAND VARIABLES
    ========================================================= */
 
 :root {
   --nu-black: #090b0d;
   --nu-ivory: #f5efe5;
 
-  --nu-gold: 212, 160, 74;
-  --nu-gold-soft: 242, 197, 111;
-  --nu-gold-bright: 255, 240, 195;
+  --nu-gold: #d4a04a;
+  --nu-gold-soft: #f2c56f;
+  --nu-gold-bright: #fff0c3;
+  --nu-white-gold: #fffdf2;
 
-  /* Glow alignment */
+  /*
+    Position of the circular emblem area.
+    Leave these alone unless we need to fine-tune alignment.
+  */
   --orbit-x: 50.2%;
   --orbit-y: 37.5%;
   --orbit-size: 20.8%;
 }
+
+
+/* =========================================================
+   BASIC RESET
+   ========================================================= */
 
 *,
 *::before,
@@ -26,6 +45,7 @@
 html,
 body {
   margin: 0;
+  padding: 0;
   min-height: 100%;
 }
 
@@ -51,16 +71,23 @@ body {
   background-image: url("nu-essence-hero-background.png");
   background-repeat: no-repeat;
 
-  /* Keeps nearly the whole artwork visible */
+  /*
+    This is the sizing we settled on:
+    nearly the entire composition is visible without
+    the page feeling overly zoomed.
+  */
   background-size: 98% auto;
   background-position: center center;
 
   background-color: var(--nu-black);
 }
 
+
+/* Future page content sits above decorative effects */
+
 .hero-content {
   position: relative;
-  z-index: 4;
+  z-index: 5;
 
   width: 100%;
   height: 100%;
@@ -68,87 +95,13 @@ body {
 
 
 /* =========================================================
-   SUBTLE GOLD GLOW ORBIT
-   The circle in the background image never moves.
+   GOLD TWINKLE CONTAINER
+   THIS DOES NOT ROTATE
    ========================================================= */
 
 .orbit-glow {
   position: absolute;
-  z-index: 3;
-  pointer-events: none;
 
-  left: var(--orbit-x);
-  top: var(--orbit-y);
-  width: var(--orbit-size);
-  aspect-ratio: 1;
-  border-radius: 50%;
-
-  transform: translate(-50%, -50%) rotate(0deg);
-  transform-origin: 50% 50%;
-
-  animation-name: nu-orbit-light;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  will-change: transform;
-}
-
-/* =========================================================
-   SMALL BRIGHT REFLECTION
-   ========================================================= */
-
-.orbit-glow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 338deg,
-    rgba(212, 160, 74, 0.10) 343deg,
-    rgba(245, 205, 125, 0.45) 348deg,
-    rgba(255, 245, 210, 1) 352deg,
-    rgba(255, 255, 255, 1) 354deg,
-    rgba(255, 235, 175, 0.65) 356deg,
-    rgba(212, 160, 74, 0.10) 359deg,
-    transparent 360deg
-  );
-
-  /*
-    Only show the outer few pixels.
-    This keeps the light on the gold ring.
-  */
-  -webkit-mask: radial-gradient(
-    circle,
-    transparent calc(100% - 5px),
-    #000 calc(100% - 4px),
-    #000 100%
-  );
-
-  mask: radial-gradient(
-    circle,
-    transparent calc(100% - 5px),
-    #000 calc(100% - 4px),
-    #000 100%
-  );
-
-  filter:
-    blur(0.35px)
-    drop-shadow(0 0 4px rgba(255, 235, 175, 0.70))
-    drop-shadow(0 0 10px rgba(212, 160, 74, 0.30));
-}
-
-/* =========================================================
-   NU ESSENCE — MOVING GOLD REFLECTION
-   The background and gold ring remain completely stationary.
-   Only a small light reflection travels around the ring.
-   ========================================================= */
-
-.orbit-glow {
-  position: absolute;
   z-index: 3;
   pointer-events: none;
 
@@ -158,129 +111,380 @@ body {
   width: var(--orbit-size);
   aspect-ratio: 1;
 
+  transform: translate(-50%, -50%);
+
   border-radius: 50%;
-
-  transform: translate(-50%, -50%) rotate(0deg);
-  transform-origin: center center;
-
-  animation: nu-orbit-light 7s linear infinite;
 }
 
 
 /* =========================================================
-   THE ACTUAL LIGHT
+   INDIVIDUAL GOLD SPARK
    ========================================================= */
 
-.orbit-glow::before {
-  content: "";
-
+.spark {
   position: absolute;
 
-  /* Places the highlight at the top edge of the invisible circle */
-  top: -4px;
-  left: 50%;
-
-  width: 14px;
-  height: 8px;
-
-  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
 
   border-radius: 50%;
 
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 245, 1) 0%,
-    rgba(255, 241, 195, 0.95) 18%,
-    rgba(242, 197, 111, 0.65) 38%,
-    rgba(212, 160, 74, 0.30) 60%,
-    rgba(212, 160, 74, 0.08) 78%,
-    transparent 100%
-  );
+  background: var(--nu-gold);
 
-  filter:
-    blur(0.4px)
-    drop-shadow(0 0 3px rgba(255, 239, 190, 0.65))
-    drop-shadow(0 0 7px rgba(218, 164, 76, 0.30));
+  opacity: 0.18;
+
+  transform: translate(-50%, -50%) scale(0.75);
+
+  animation:
+    nu-gold-twinkle
+    7s
+    ease-in-out
+    infinite;
+
+  will-change:
+    opacity,
+    transform,
+    box-shadow;
 }
 
 
 /* =========================================================
-   SECONDARY SOFT HALO
+   SPARK POSITIONS
+
+        1
+     8     2
+
+   7         3
+
+     6     4
+        5
+
+   These remain fixed.
+   Only their brightness changes.
    ========================================================= */
 
-.orbit-glow::after {
-  content: "";
-
-  position: absolute;
-
-  top: -8px;
+.spark-1 {
   left: 50%;
+  top: 0%;
+  animation-delay: 0s;
+}
 
-  width: 24px;
-  height: 14px;
+.spark-2 {
+  left: 85.35%;
+  top: 14.65%;
+  animation-delay: 0.875s;
+}
 
-  transform: translateX(-50%);
+.spark-3 {
+  left: 100%;
+  top: 50%;
+  animation-delay: 1.75s;
+}
 
-  border-radius: 50%;
+.spark-4 {
+  left: 85.35%;
+  top: 85.35%;
+  animation-delay: 2.625s;
+}
 
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 230, 170, 0.20) 0%,
-    rgba(218, 164, 76, 0.10) 45%,
-    transparent 75%
-  );
+.spark-5 {
+  left: 50%;
+  top: 100%;
+  animation-delay: 3.5s;
+}
 
-  filter: blur(4px);
+.spark-6 {
+  left: 14.65%;
+  top: 85.35%;
+  animation-delay: 4.375s;
+}
+
+.spark-7 {
+  left: 0%;
+  top: 50%;
+  animation-delay: 5.25s;
+}
+
+.spark-8 {
+  left: 14.65%;
+  top: 14.65%;
+  animation-delay: 6.125s;
 }
 
 
 /* =========================================================
-   MOVEMENT
-   One full orbit every 7 seconds
+   GOLD / DIAMOND-LIKE TWINKLE
+
+   Most of the time each point is nearly invisible.
+   It briefly catches a bright white-gold reflection,
+   then fades back down as the next point illuminates.
    ========================================================= */
 
-@keyframes nu-orbit-light {
+@keyframes nu-gold-twinkle {
 
-  from {
-    transform:
-      translate(-50%, -50%)
-      rotate(0deg);
-  }
-
-  to {
-    transform:
-      translate(-50%, -50%)
-      rotate(360deg);
-  }
-
-}
-
-
-/* =========================================================
-   GOLD LIGHT MOVEMENT
-   One complete orbit every 7 seconds.
-   ========================================================= */
-
-@keyframes nu-orbit-light {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
+  0%,
+  68%,
   100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+    opacity: 0.12;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.70);
+
+    background: var(--nu-gold);
+
+    box-shadow:
+      0 0 0 rgba(255, 253, 242, 0),
+      0 0 0 rgba(255, 240, 195, 0),
+      0 0 0 rgba(212, 160, 74, 0);
+  }
+
+
+  74% {
+    opacity: 0.32;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.85);
+
+    background: var(--nu-gold-soft);
+
+    box-shadow:
+      0 0 3px rgba(255, 240, 195, 0.25),
+      0 0 7px rgba(212, 160, 74, 0.15);
+  }
+
+
+  80% {
+    opacity: 0.75;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    background: var(--nu-gold-bright);
+
+    box-shadow:
+      0 0 3px rgba(255, 253, 242, 0.65),
+      0 0 7px rgba(255, 225, 155, 0.45),
+      0 0 12px rgba(212, 160, 74, 0.25);
+  }
+
+
+  83% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.35);
+
+    background: var(--nu-white-gold);
+
+    box-shadow:
+      0 0 3px rgba(255, 255, 255, 1),
+      0 0 7px rgba(255, 246, 210, 0.95),
+      0 0 14px rgba(244, 201, 115, 0.70),
+      0 0 22px rgba(212, 160, 74, 0.28);
+  }
+
+
+  87% {
+    opacity: 0.62;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.95);
+
+    background: var(--nu-gold-soft);
+
+    box-shadow:
+      0 0 3px rgba(255, 240, 195, 0.38),
+      0 0 8px rgba(212, 160, 74, 0.20);
+  }
+
+
+  94% {
+    opacity: 0.12;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.70);
+
+    background: var(--nu-gold);
+
+    box-shadow:
+      none;
   }
 }
+
+
+/* =========================================================
+   STAR FLARE
+
+   Gives the brightest moment a polished jewelry/star glint
+   instead of just making the dot larger.
+   ========================================================= */
+
+.spark::before,
+.spark::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  background:
+    rgba(255, 250, 225, 0.95);
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  animation:
+    nu-star-flare
+    7s
+    ease-in-out
+    infinite;
+}
+
+
+/* Horizontal flare */
+
+.spark::before {
+  width: 16px;
+  height: 1px;
+}
+
+
+/* Vertical flare */
+
+.spark::after {
+  width: 1px;
+  height: 16px;
+}
+
+
+/* =========================================================
+   MATCH STAR TIMING TO EACH SPARK
+   ========================================================= */
+
+.spark-1::before,
+.spark-1::after {
+  animation-delay: 0s;
+}
+
+.spark-2::before,
+.spark-2::after {
+  animation-delay: 0.875s;
+}
+
+.spark-3::before,
+.spark-3::after {
+  animation-delay: 1.75s;
+}
+
+.spark-4::before,
+.spark-4::after {
+  animation-delay: 2.625s;
+}
+
+.spark-5::before,
+.spark-5::after {
+  animation-delay: 3.5s;
+}
+
+.spark-6::before,
+.spark-6::after {
+  animation-delay: 4.375s;
+}
+
+.spark-7::before,
+.spark-7::after {
+  animation-delay: 5.25s;
+}
+
+.spark-8::before,
+.spark-8::after {
+  animation-delay: 6.125s;
+}
+
+
+/* =========================================================
+   STAR FLARE ANIMATION
+   ========================================================= */
+
+@keyframes nu-star-flare {
+
+  0%,
+  77%,
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+
+  81% {
+    opacity: 0.30;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.40);
+  }
+
+
+  83% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+
+  86% {
+    opacity: 0.35;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.60);
+  }
+
+
+  91% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+}
+
 
 /* =========================================================
    ACCESSIBILITY
    ========================================================= */
 
+@media (prefers-reduced-motion: reduce) {
 
+  .spark,
+  .spark::before,
+  .spark::after {
+    animation: none;
+  }
+
+}
 
 
 /* =========================================================
    MOBILE
-   Temporary until final mobile layout is designed.
+   Temporary treatment until we design the dedicated
+   Nu Essence mobile homepage.
    ========================================================= */
 
 @media (max-width: 700px) {
@@ -293,17 +497,36 @@ body {
     background-position: center top;
   }
 
-  .orbit-glow {
-    filter:
-      blur(0.2px)
-      drop-shadow(
-        0 0 2px
-        rgba(var(--nu-gold-bright), 0.38)
-      )
-      drop-shadow(
-        0 0 4px
-        rgba(var(--nu-gold), 0.14)
-      );
+
+  /* Slightly smaller sparkle on small screens */
+
+  .spark {
+    width: 4px;
+    height: 4px;
+  }
+
+
+  .spark::before {
+    width: 11px;
+  }
+
+
+  .spark::after {
+    height: 11px;
   }
 
 }
+One HTML change is required
+
+Because this version uses the existing individual gold lights, your index.html needs this instead of the single empty glow div:
+
+<div class="orbit-glow" aria-hidden="true">
+  <span class="spark spark-1"></span>
+  <span class="spark spark-2"></span>
+  <span class="spark spark-3"></span>
+  <span class="spark spark-4"></span>
+  <span class="spark spark-5"></span>
+  <span class="spark spark-6"></span>
+  <span class="spark spark-7"></span>
+  <span class="spark spark-8"></span>
+</div>
