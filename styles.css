@@ -1,16 +1,6 @@
 /* =========================================================
    NU ESSENCE PSYCHIATRY
    HERO BACKGROUND + RANDOM GOLD TWINKLES
-
-   The background image stays completely still.
-   The gold ring is always visible.
-   JavaScript randomly makes fixed points on the ring
-   brighten and twinkle like polished gold catching light.
-   ========================================================= */
-
-
-/* =========================================================
-   BRAND VARIABLES
    ========================================================= */
 
 :root {
@@ -22,18 +12,14 @@
   --nu-gold-bright: #fff0c3;
   --nu-white-gold: #fffdf2;
 
-  /*
-    Position of the main gold circle.
-    These can be fine-tuned later if needed.
-  */
-  --orbit-x: 50.2%;
-  --orbit-y: 37.5%;
-  --orbit-size: 20.8%;
+  /* Main gold ring alignment */
+  --orbit-x: 54.8%;
+  --orbit-y: 36.5%;
+  --orbit-size: 21.2%;
 }
 
-
 /* =========================================================
-   BASIC RESET
+   RESET
    ========================================================= */
 
 *,
@@ -54,7 +40,6 @@ body {
   font-family: Georgia, "Times New Roman", serif;
 }
 
-
 /* =========================================================
    HERO
    ========================================================= */
@@ -71,17 +56,35 @@ body {
   background-image: url("nu-essence-hero-background.png");
   background-repeat: no-repeat;
 
-  /*
-    This is the sizing we settled on.
-  */
   background-size: 98% auto;
   background-position: center center;
 
   background-color: var(--nu-black);
 }
 
+/* =========================================================
+   ARTWORK-ALIGNED OVERLAY
+   ========================================================= */
 
-/* Future page content */
+.hero-art-overlay {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 98%;
+  aspect-ratio: 3 / 2;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+/* =========================================================
+   FUTURE HERO CONTENT
+   ========================================================= */
 
 .hero-content {
   position: relative;
@@ -91,20 +94,12 @@ body {
   height: 100%;
 }
 
-
 /* =========================================================
-   MAIN GOLD RING TWINKLE CONTAINER
-
-   This container does NOT rotate.
-   It simply provides the coordinate system for
-   the sparkle points around the existing gold ring.
+   GOLD RING SPARK CONTAINER
    ========================================================= */
 
 .orbit-glow {
   position: absolute;
-
-  z-index: 4;
-  pointer-events: none;
 
   left: var(--orbit-x);
   top: var(--orbit-y);
@@ -115,38 +110,35 @@ body {
   transform: translate(-50%, -50%);
 
   border-radius: 50%;
+
+  pointer-events: none;
 }
 
-
 /* =========================================================
-   INDIVIDUAL REFLECTION POINTS
+   BASE SPARK
    ========================================================= */
 
 .spark {
   position: absolute;
 
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 
   border-radius: 50%;
 
-  /*
-    At rest the point should nearly disappear into
-    the existing gold ring.
-  */
   background: var(--nu-gold);
 
-  opacity: 0.08;
+  opacity: 0;
 
   transform:
     translate(-50%, -50%)
-    scale(0.75);
+    scale(0.7);
 
   transition:
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.35s ease;
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 
   will-change:
     opacity,
@@ -154,24 +146,8 @@ body {
     box-shadow;
 }
 
-
 /* =========================================================
-   FIXED LOCATIONS ON THE MAIN GOLD RING
-
-   These points stay in place.
-   JavaScript randomly selects which point lights up.
-
-              1
-
-        8           2
-
-
-     7                 3
-
-
-        6           4
-
-              5
+   FIXED REFLECTION LOCATIONS ON THE GOLD RING
    ========================================================= */
 
 .spark-1 {
@@ -180,46 +156,42 @@ body {
 }
 
 .spark-2 {
-  left: 76%;
+  left: 77%;
   top: 8%;
 }
 
 .spark-3 {
   left: 98%;
-  top: 48%;
+  top: 42%;
 }
 
 .spark-4 {
-  left: 82%;
-  top: 84%;
+  left: 91%;
+  top: 72%;
 }
 
 .spark-5 {
-  left: 50%;
+  left: 55%;
   top: 99%;
 }
 
 .spark-6 {
-  left: 18%;
-  top: 84%;
+  left: 21%;
+  top: 88%;
 }
 
 .spark-7 {
-  left: 2%;
-  top: 50%;
+  left: 1%;
+  top: 52%;
 }
 
 .spark-8 {
-  left: 20%;
-  top: 14%;
+  left: 17%;
+  top: 17%;
 }
 
-
 /* =========================================================
-   ACTIVE POLISHED-GOLD REFLECTION
-
-   JavaScript adds the class:
-   .is-shining
+   ACTIVE GOLD REFLECTION
    ========================================================= */
 
 .spark.is-shining {
@@ -227,21 +199,34 @@ body {
 
   transform:
     translate(-50%, -50%)
-    scale(1.25);
+    scale(1.35);
 
   background: var(--nu-white-gold);
 
   box-shadow:
-    0 0 2px rgba(255, 255, 255, 1),
-    0 0 5px rgba(255, 246, 215, 0.95),
-    0 0 10px rgba(255, 222, 145, 0.80),
-    0 0 16px rgba(242, 197, 111, 0.55),
-    0 0 24px rgba(212, 160, 74, 0.24);
+    0 0 3px rgba(255, 255, 255, 1),
+    0 0 7px rgba(255, 244, 205, 1),
+    0 0 14px rgba(242, 197, 111, 0.90),
+    0 0 24px rgba(212, 160, 74, 0.55);
 }
 
+/* Stronger occasional flash */
+
+.spark.is-strong {
+  transform:
+    translate(-50%, -50%)
+    scale(1.55);
+
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 1),
+    0 0 10px rgba(255, 248, 215, 1),
+    0 0 18px rgba(255, 220, 135, 0.95),
+    0 0 28px rgba(242, 197, 111, 0.65),
+    0 0 38px rgba(212, 160, 74, 0.30);
+}
 
 /* =========================================================
-   JEWELRY-STYLE STAR FLARE
+   STAR FLARE
    ========================================================= */
 
 .spark::before,
@@ -266,133 +251,46 @@ body {
     transform 0.22s ease;
 }
 
-
-/* Horizontal sparkle */
-
 .spark::before {
   width: 16px;
   height: 1px;
 }
-
-
-/* Vertical sparkle */
 
 .spark::after {
   width: 1px;
   height: 16px;
 }
 
-
-/* Flare while active */
-
 .spark.is-shining::before,
 .spark.is-shining::after {
-  opacity: 0.90;
+  opacity: 0.9;
 
   transform:
     translate(-50%, -50%)
     scale(1);
 }
 
-
-/* =========================================================
-   OPTIONAL AMBIENT RING GLINTS
-
-   These are separate from the main 8 reflection points.
-
-   ring-glints.js may create one or two very faint reflections
-   at random locations on the ring.
-
-   They should remain secondary to the main sparkle effect.
-   ========================================================= */
-
-.ring-glints {
-  position: absolute;
-
-  z-index: 3;
-  pointer-events: none;
-
-  left: var(--orbit-x);
-  top: var(--orbit-y);
-
-  width: var(--orbit-size);
-  aspect-ratio: 1;
-
-  transform: translate(-50%, -50%);
-
-  border-radius: 50%;
-}
-
-
-.ring-glint {
-  position: absolute;
-
-  width: 7px;
-  height: 7px;
-
-  transform:
-    translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  opacity: 0;
-
-  transition:
-    opacity 0.65s ease-in-out;
-
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 245, 0.95) 0%,
-    rgba(255, 241, 195, 0.70) 25%,
-    rgba(242, 197, 111, 0.30) 55%,
-    transparent 78%
-  );
-
-  filter:
-    blur(0.25px)
-    drop-shadow(
-      0 0 3px
-      rgba(255, 239, 190, 0.45)
-    )
-    drop-shadow(
-      0 0 7px
-      rgba(218, 164, 76, 0.20)
-    );
-}
-
-
 /* =========================================================
    ACCESSIBILITY
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .spark,
   .spark::before,
-  .spark::after,
-  .ring-glint {
+  .spark::after {
     transition: none;
   }
 
   .spark {
     opacity: 0;
   }
-
-  .ring-glint {
-    opacity: 0;
-  }
-
 }
-
 
 /* =========================================================
    MOBILE
-
-   Temporary until we design the dedicated mobile version.
    ========================================================= */
 
 @media (max-width: 700px) {
-
   .hero {
     width: 100%;
     height: 100vh;
@@ -401,26 +299,16 @@ body {
     background-position: center top;
   }
 
-
   .spark {
     width: 4px;
     height: 4px;
   }
 
-
   .spark::before {
     width: 11px;
   }
 
-
   .spark::after {
     height: 11px;
   }
-
-
-  .ring-glint {
-    width: 5px;
-    height: 5px;
-  }
-
 }
