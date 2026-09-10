@@ -11,10 +11,10 @@
   --nu-gold-soft: 242, 197, 111;
   --nu-gold-bright: 255, 240, 195;
 
-  /* Alignment for the approved 1536 × 1024 background image */
-  --orbit-x: 56.9%;
-  --orbit-y: 37.4%;
-  --orbit-size: 21.7%;
+  /* Re-aligned for the current hero background sizing */
+  --orbit-x: 50.2%;
+  --orbit-y: 37.5%;
+  --orbit-size: 20.8%;
 }
 
 *,
@@ -85,44 +85,81 @@ body {
   transform-origin: center;
   will-change: transform;
 
-  /* Tiny light sweep rather than a large crescent */
+  animation: nu-orbit-light 7s linear infinite;
+}
+
+/* Main highlight */
+.orbit-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 324deg,
-    rgba(var(--nu-gold), 0.03) 330deg,
-    rgba(var(--nu-gold-soft), 0.18) 336deg,
-    rgba(var(--nu-gold-bright), 0.72) 341deg,
-    rgba(255, 255, 245, 1) 345deg,
-    rgba(var(--nu-gold-bright), 0.72) 348deg,
-    rgba(var(--nu-gold-soft), 0.18) 353deg,
-    rgba(var(--nu-gold), 0.03) 357deg,
+    transparent 334deg,
+    rgba(var(--nu-gold), 0.04) 339deg,
+    rgba(var(--nu-gold-soft), 0.16) 343deg,
+    rgba(var(--nu-gold-bright), 0.58) 347deg,
+    rgba(255, 255, 245, 0.96) 350deg,
+    rgba(var(--nu-gold-bright), 0.50) 353deg,
+    rgba(var(--nu-gold-soft), 0.14) 357deg,
     transparent 360deg
   );
 
-  /* Keep the glow only on the outside edge */
   -webkit-mask: radial-gradient(
     circle,
-    transparent 0%,
-    transparent calc(100% - 5px),
-    #000 calc(100% - 4px),
+    transparent calc(100% - 4px),
+    #000 calc(100% - 3px),
     #000 100%
   );
-
   mask: radial-gradient(
     circle,
-    transparent 0%,
-    transparent calc(100% - 5px),
-    #000 calc(100% - 4px),
+    transparent calc(100% - 4px),
+    #000 calc(100% - 3px),
     #000 100%
   );
 
   filter:
-    blur(0.3px)
-    drop-shadow(0 0 3px rgba(var(--nu-gold-bright), 0.50))
-    drop-shadow(0 0 7px rgba(var(--nu-gold), 0.20));
+    blur(0.25px)
+    drop-shadow(0 0 2px rgba(var(--nu-gold-bright), 0.45))
+    drop-shadow(0 0 6px rgba(var(--nu-gold), 0.18));
+}
 
-  animation: nu-orbit-light 7s linear infinite;
+/* Soft outer bloom */
+.orbit-glow::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  opacity: 0.45;
+
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 336deg,
+    rgba(var(--nu-gold-soft), 0.08) 342deg,
+    rgba(var(--nu-gold-bright), 0.28) 348deg,
+    rgba(255, 248, 225, 0.42) 351deg,
+    rgba(var(--nu-gold-soft), 0.10) 356deg,
+    transparent 360deg
+  );
+
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent calc(100% - 7px),
+    #000 calc(100% - 5px),
+    transparent 100%
+  );
+  mask: radial-gradient(
+    circle,
+    transparent calc(100% - 7px),
+    #000 calc(100% - 5px),
+    transparent 100%
+  );
+
+  filter: blur(4px);
 }
 
 /* =========================================================
