@@ -4,6 +4,7 @@
 <head>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="hero-ring-cycle.css" />
+  <link rel="stylesheet" href="hero-content.css" />
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,18 +14,167 @@
 
 <body>
 
- <header class="hero">
+  <header class="hero">
 
-  <div class="hero-art-overlay" aria-hidden="true">
-    <div class="hero-logo-static">
-      <img src="ne-monogram-no-ring.png" alt="Nu Essence Psychiatry">
+    <div class="site-header">
+      <a href="/" class="brand">
+        <img src="ne-monogram-no-ring.png" alt="Nu Essence Psychiatry" class="brand-mark">
+        <span class="brand-name">
+          <span class="primary">Nu Essence</span>
+          <span class="secondary">Psychiatry</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#home" aria-current="page">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#resources">Resources</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#consult" class="btn-consult">
+          Book a Consultation
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#account" class="icon-circle" aria-label="Account">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.8-4 6-6 8-6s6.2 2 8 6"/></svg>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <div class="hero-content">
-  </div>
+    <div class="hero-art-overlay" aria-hidden="true">
+      <div class="hero-logo-static">
+        <img src="ne-monogram-no-ring.png" alt="Nu Essence Psychiatry">
+      </div>
+    </div>
 
-</header>
+    <p class="hero-ring-tagline">A HEALTHIER MIND. A BRIGHTER YOU.</p>
+
+    <div class="hero-content">
+
+      <div class="hero-left">
+        <p class="eyebrow">NEXT-GENERATION MENTAL HEALTH CARE</p>
+        <h1>Clarity for today.<br>Strength for <span class="accent">life.</span></h1>
+
+        <div class="divider" aria-hidden="true">
+          <span class="line"></span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 3 6 7 6 11a6 6 0 0 1-12 0c0-4 2-8 6-11z"/></svg>
+          <span class="line"></span>
+        </div>
+
+        <p class="lede">Personalized, evidence-based psychiatric care designed around you. Wherever you are on your journey, we're here to help you feel better, live fuller, and build a brighter tomorrow.</p>
+
+        <div class="hero-ctas">
+          <a href="#consult" class="btn-primary">
+            Book a Consultation
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#story" class="watch-story">
+            <span class="play-circle">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            Watch Our Story
+          </a>
+        </div>
+
+        <div class="trust-cards">
+          <div class="trust-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3z"/></svg>
+            <h3>Confidential &amp; Secure</h3>
+            <p>HIPAA-compliant care from the comfort of home or in person.</p>
+          </div>
+          <div class="trust-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.8-4 6-6 8-6s6.2 2 8 6"/></svg>
+            <h3>Personalized Care</h3>
+            <p>Treatment tailored to your unique needs, goals, and life stage.</p>
+          </div>
+          <div class="trust-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <h3>Compassionate Support</h3>
+            <p>Empathy, respect, and expertise you can trust.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <p class="eyebrow">CARE THAT EVOLVES</p>
+        <h2>Whole-person psychiatric care for <span class="accent">modern life.</span></h2>
+
+        <div class="divider" aria-hidden="true">
+          <span class="line"></span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 3 6 7 6 11a6 6 0 0 1-12 0c0-4 2-8 6-11z"/></svg>
+          <span class="line"></span>
+        </div>
+
+        <p class="lede">Comprehensive, compassionate support for your mind, body, and future — delivered with clinical excellence and a deeply human touch.</p>
+
+        <div class="service-list">
+          <a href="#psychiatric-eval" class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9.5 2a3.5 3.5 0 0 0-3.5 3.5c0 .8.2 1.5.6 2.1A4 4 0 0 0 5 11.2 4 4 0 0 0 6.6 17a4 4 0 0 0 2.9 6.5c1.4 0 2.6-.7 3.3-1.8"/><path d="M9.5 2v18.5"/></svg>
+            </span>
+            <span class="service-text">
+              <h3>Psychiatric Evaluation &amp; Care</h3>
+              <p>Thoughtful, evidence-based treatment for lasting well-being.</p>
+            </span>
+            <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </a>
+
+          <a href="#medication" class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2c4 3 6 7 6 11a6 6 0 0 1-12 0c0-4 2-8 6-11z"/></svg>
+            </span>
+            <span class="service-text">
+              <h3>Medication Management</h3>
+              <p>Safe, effective, and personalized medication support.</p>
+            </span>
+            <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </a>
+
+          <a href="#telehealth" class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M8 21h8"/></svg>
+            </span>
+            <span class="service-text">
+              <h3>Telehealth &amp; In-Person Care</h3>
+              <p>Convenient, secure care wherever you are in Florida.</p>
+            </span>
+            <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </a>
+
+          <a href="#life-stages" class="service-card">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 20c0-3 2.5-5.5 6-5.5s6 2.5 6 5.5"/><path d="M15 14.5c2.8.3 5 2.5 5 5.5"/></svg>
+            </span>
+            <span class="service-text">
+              <h3>Support for Every Stage of Life</h3>
+              <p>Care for anxiety, depression, ADHD, life transitions, and more.</p>
+            </span>
+            <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <p class="quote">A clearer mind. A more balanced life. It's possible.</p>
+      </div>
+
+    </div>
+
+  </header>
+
+  <div class="tagline-bar">
+    <div class="words">
+      <span>Compassion</span>
+      <span>Clarity</span>
+      <span>Renewal</span>
+      <svg viewBox="0 0 24 24" fill="var(--nu-gold)"><path d="M12 2c4 3 6 7 6 11a6 6 0 0 1-12 0c0-4 2-8 6-11z"/></svg>
+      <span>You</span>
+    </div>
+    <span class="script">Mental Wellness for a Brighter Tomorrow</span>
+  </div>
 
   <script src="hero-ring-cycle.js"></script>
 
