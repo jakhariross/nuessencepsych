@@ -10,7 +10,7 @@
   if (!mountPoint) return;
 
   var FRAME_COUNT = 10;
-  var FRAME_PATH = "assets/ring-frames/ring-";
+  var FRAME_PATH = "/ring-frames/ring-";
   var MIN_HOLD = 3000;
   var MAX_HOLD = 6500;
   var FADE_MS = 1600; // must match .ring-shine-layer's CSS transition duration
