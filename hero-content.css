@@ -150,7 +150,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   width: 54px;
   background: linear-gradient(90deg, transparent, var(--nu-gold), transparent);
 }
-.divider svg { width: 22px; height: 22px; color: var(--nu-gold); flex-shrink: 0; }
+.divider svg { width: 15px; height: 15px; color: var(--nu-gold); flex-shrink: 0; }
 
 .hero-left p.lede {
   font-size: 15.5px;
@@ -236,11 +236,11 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .hero-right {
   position: absolute;
-  right: clamp(16px, 3vw, 40px);
-  top: 50%;
+  right: clamp(16px, 2.5vw, 32px);
+  top: 53%;
   transform: translateY(-50%);
-  width: 25%;
-  min-width: 260px;
+  width: 22%;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   gap: 14px;
