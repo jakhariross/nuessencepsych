@@ -2,46 +2,22 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="hero-ring-cycle.css" />
+
   <meta charset="utf-8" />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  />
-
-  <meta
-    name="description"
-    content="Nu Essence Psychiatry — modern, compassionate psychiatric care."
-  />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Nu Essence Psychiatry — modern, compassionate psychiatric care." />
   <title>Nu Essence Psychiatry</title>
-
-  <link
-    rel="stylesheet"
-    href="styles.css"
-  />
 </head>
 
 <body>
 
   <header class="hero">
 
-    <!--
-      Overlay matches the hero artwork.
-      The gold ring itself is part of the background image
-      and always remains visible.
-    -->
-    <div
-      class="hero-art-overlay"
-      aria-hidden="true"
-    >
+    <div class="hero-art-overlay" aria-hidden="true">
 
-      <!--
-        These fixed points sit on the gold ring.
-        JavaScript randomly chooses which one twinkles.
-      -->
       <div class="orbit-glow">
-
         <span class="spark spark-1"></span>
         <span class="spark spark-2"></span>
         <span class="spark spark-3"></span>
@@ -50,22 +26,17 @@
         <span class="spark spark-6"></span>
         <span class="spark spark-7"></span>
         <span class="spark spark-8"></span>
-
       </div>
 
     </div>
 
-
-    <!-- Future homepage content -->
     <div class="hero-content">
     </div>
 
   </header>
 
-
-  <!-- Main random sparkle controller -->
   <script src="script.js"></script>
+  <script src="hero-ring-cycle.js"></script>
 
 </body>
-
 </html>
