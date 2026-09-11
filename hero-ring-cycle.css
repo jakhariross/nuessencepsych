@@ -60,3 +60,23 @@
     transition: none;
   }
 }
+
+
+.hero-logo-static {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+
+  left: var(--orbit-x);
+  top: var(--orbit-y);
+  width: 19.4%;
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+}
+
+.hero-logo-static img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
