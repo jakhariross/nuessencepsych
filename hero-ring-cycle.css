@@ -48,7 +48,7 @@
   background-position: center;
 
   opacity: 0;
-  transition: opacity 1.6s ease-in-out;
+  transition: opacity 3.6s cubic-bezier(0.33, 0, 0.2, 1);
 }
 
 .ring-shine-layer.is-active {
