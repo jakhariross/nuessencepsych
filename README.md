@@ -1,65 +1,46 @@
-# Nu Essence Psychiatry — Website Starter
+# Nu Essence Random Gold Ring Package
 
-This starter uses the approved Nu Essence background artwork and adds a **subtle rotating light reflection around the existing gold circle every 7 seconds**.
+This package uses the 10 supplied transparent gold ring variants and randomly crossfades between them.
 
-## Key behavior
+## Included
 
-- The supplied background is completely static.
-- The circular artwork does **not** rotate.
-- Only a separate CSS highlight rotates over the outer gold ring.
-- One complete light orbit takes **7 seconds**.
-- Reduced-motion accessibility is included.
+- `index.html`
+- `styles.css`
+- `script.js`
+- `assets/ring-frames/ring-01.png` through `ring-10.png`
 
-## Files
+## Hero background
 
-```text
-nu-essence-site-starter/
-├── index.html
-├── styles.css
-├── script.js
-└── assets/
-    └── nu-essence-hero-background.png
-```
+The CSS expects your existing ring-free hero background at:
 
-## Add to GitHub
+`assets/hero-base-no-ring.jpg`
 
-Copy the entire folder into the repository, or copy the files into the matching locations in the existing project.
+If your current hero background has a different filename, either:
 
-For a plain HTML/CSS site, open `index.html`.
-
-If your project uses React/Next/Vite, the glow can be moved into a component later; the core CSS is framework-independent.
-
-## Ring position
-
-The glow is aligned to the existing ring with:
+1. rename it to `hero-base-no-ring.jpg`, or
+2. change this line in `styles.css`:
 
 ```css
---orbit-x: 56.9%;
---orbit-y: 37.4%;
---orbit-size: 21.7%;
+background-image: url("assets/hero-base-no-ring.jpg");
 ```
 
-These values are based on the supplied 1536 × 1024 hero artwork.
+## Animation behavior
 
-## Change animation speed
+- Hero background stays completely still.
+- One transparent ring variant is visible at a time.
+- The current ring fades out over 1.6 seconds.
+- A different random ring fades in.
+- It remains visible for a random 3–6.5 seconds.
+- The same ring is never selected twice in a row.
+
+## Fine-tuning ring position
+
+In `styles.css`, adjust only these variables if the ring needs to move or resize:
 
 ```css
-animation: nu-orbit-light 7s linear infinite;
+--orbit-x: 54.8%;
+--orbit-y: 36.5%;
+--orbit-size: 29.3%;
 ```
 
-Examples:
-
-- `5s` = faster
-- `7s` = current
-- `10s` = slower
-- `15s` = much more relaxed
-
-## Make the glow more subtle
-
-Lower the alpha value of the brightest stops in the `conic-gradient`, or reduce the `drop-shadow` opacity.
-
-## Important
-
-The current desktop hero preserves the artwork at its original 3:2 aspect ratio so the CSS glow remains exactly aligned with the gold circle.
-
-Once the final mobile design is approved, create a dedicated mobile crop/background rather than simply stretching the desktop composition.
+Do not add the old `.orbit-glow`, `.spark`, or `.ring-glints` systems back in. This package replaces them.
