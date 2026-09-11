@@ -46,16 +46,16 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .brand-name .primary {
   display: block;
-  font-size: 19px;
-  letter-spacing: 0.12em;
+  font-size: 24px;
+  letter-spacing: 0.1em;
   color: var(--nu-ivory);
 }
 .brand-name .secondary {
   display: block;
-  font-size: 9px;
-  letter-spacing: 0.34em;
+  font-size: 11px;
+  letter-spacing: 0.3em;
   color: var(--nu-gold);
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
 .site-nav {
@@ -63,8 +63,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   gap: clamp(14px, 1.8vw, 30px);
 }
 .site-nav a {
-  font-size: 12.5px;
-  letter-spacing: 0.09em;
+  font-size: 15px;
+  letter-spacing: 0.08em;
   color: var(--nu-text-muted-light);
   white-space: nowrap;
 }
@@ -150,7 +150,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   width: 54px;
   background: linear-gradient(90deg, transparent, var(--nu-gold), transparent);
 }
-.divider svg { width: 18px; height: 18px; color: var(--nu-gold); flex-shrink: 0; }
+.divider svg { width: 22px; height: 22px; color: var(--nu-gold); flex-shrink: 0; }
 
 .hero-left p.lede {
   font-size: 15.5px;
@@ -205,7 +205,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   border: 1px solid rgba(212, 160, 74, 0.16);
   border-radius: 12px;
   overflow: hidden;
-  margin-top: 6px;
+  margin-top: 22px;
+  width: 118%;
 }
 .trust-card {
   background: rgba(9, 11, 13, 0.82);
@@ -229,19 +230,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   color: var(--nu-text-muted-light);
 }
 
-/* Tagline directly under the ring */
-.hero-ring-tagline {
-  position: absolute;
-  left: var(--orbit-x);
-  top: calc(var(--orbit-y) + 24%);
-  transform: translate(-50%, 0);
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  color: var(--nu-gold-soft);
-  white-space: nowrap;
-  z-index: 5;
-}
+/* .hero-ring-tagline removed per request -- no tagline under the ring */
 
 /* ===================== Hero right (cream) ===================== */
 
@@ -254,10 +243,14 @@ ul { list-style: none; margin: 0; padding: 0; }
   min-width: 260px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   color: var(--nu-text-dark);
 }
-.hero-right .eyebrow { color: #a97d34; }
+.hero-right .eyebrow {
+  color: #a97d34;
+  font-size: 14px;
+  margin-bottom: -6px;
+}
 .hero-right h2 {
   font-size: clamp(24px, 2.4vw, 32px);
   line-height: 1.25;
@@ -310,8 +303,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .hero-right .quote {
   font-style: italic;
-  font-size: 13px;
-  color: var(--nu-text-muted-dark);
+  font-size: 15.5px;
+  color: #a97d34;
   text-align: center;
   margin: 4px 0 0;
 }
