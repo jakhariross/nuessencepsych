@@ -69,7 +69,7 @@
 
   left: var(--orbit-x);
   top: var(--orbit-y);
-  width: 21.50%;
+  width: 21.00%;
   aspect-ratio: 1;
 
   transform: translate(-50%, -50%);
