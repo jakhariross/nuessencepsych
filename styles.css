@@ -70,13 +70,6 @@ body {
 
   pointer-events: none;
   z-index: 3;
-
-
-<div class="hero-art-overlay" aria-hidden="true">
-  <div class="hero-logo-static">
-    <img src="ne-monogram-no-ring.png" alt="Nu Essence Psychiatry">
-  </div>
-</div>
    
 }
 
