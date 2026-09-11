@@ -1,6 +1,6 @@
 /* =========================================================
    NU ESSENCE PSYCHIATRY
-   HERO BACKGROUND + RANDOM GOLD TWINKLES
+   HERO BACKGROUND + RING SHINE EFFECT
    ========================================================= */
 
 :root {
@@ -44,23 +44,10 @@ body {
    HERO
    ========================================================= */
 
-.hero {
-  position: relative;
-
-  width: 100%;
-  height: 100vh;
-
-  overflow: hidden;
-  isolation: isolate;
-
-  background-image: url("nu-essence-hero-background.png");
-  background-repeat: no-repeat;
-
-  background-size: 98% auto;
-  background-position: center center;
-
-  background-color: var(--nu-black);
-}
+/* NOTE: .hero's background-image/size/position/color now live
+   in hero-ring-cycle.css, not here, to avoid two files fighting
+   over the same property. Only non-conflicting layout rules
+   stay in this file. */
 
 /* =========================================================
    ARTWORK-ALIGNED OVERLAY
@@ -98,197 +85,6 @@ body {
 }
 
 /* =========================================================
-   GOLD RING SPARK CONTAINER
-   ========================================================= */
-
-.orbit-glow {
-  position: absolute;
-
-  left: var(--orbit-x);
-  top: var(--orbit-y);
-
-  width: var(--orbit-size);
-  aspect-ratio: 1;
-
-  transform: translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  pointer-events: none;
-}
-
-/* =========================================================
-   BASE SPARK
-   ========================================================= */
-
-.spark {
-  position: absolute;
-
-  width: 7px;
-  height: 7px;
-
-  border-radius: 50%;
-
-  background: var(--nu-gold);
-
-  opacity: 0;
-
-  transform:
-    translate(-50%, -50%)
-    scale(0.7);
-
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
-
-  will-change:
-    opacity,
-    transform,
-    box-shadow;
-}
-
-/* =========================================================
-   FIXED REFLECTION LOCATIONS ON THE GOLD RING
-   ========================================================= */
-
-.spark-1 {
-  left: 50%;
-  top: 0%;
-}
-
-.spark-2 {
-  left: 76%;
-  top: 7%;
-}
-
-.spark-3 {
-  left: 94%;
-  top: 27%;
-}
-
-.spark-4 {
-  left: 100%;
-  top: 50%;
-}
-
-.spark-5 {
-  left: 82%;
-  top: 84%;
-}
-
-.spark-6 {
-  left: 50%;
-  top: 100%;
-}
-
-.spark-7 {
-  left: 0%;
-  top: 50%;
-}
-
-.spark-8 {
-  left: 18%;
-  top: 16%;
-}
-/* =========================================================
-   ACTIVE GOLD REFLECTION
-   ========================================================= */
-
-.spark.is-shining {
-  opacity: 1;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1.35);
-
-  background: var(--nu-white-gold);
-
-  box-shadow:
-    0 0 3px rgba(255, 255, 255, 1),
-    0 0 7px rgba(255, 244, 205, 1),
-    0 0 14px rgba(242, 197, 111, 0.90),
-    0 0 24px rgba(212, 160, 74, 0.55);
-}
-
-/* Stronger occasional flash */
-
-.spark.is-strong {
-  transform:
-    translate(-50%, -50%)
-    scale(1.55);
-
-  box-shadow:
-    0 0 4px rgba(255, 255, 255, 1),
-    0 0 10px rgba(255, 248, 215, 1),
-    0 0 18px rgba(255, 220, 135, 0.95),
-    0 0 28px rgba(242, 197, 111, 0.65),
-    0 0 38px rgba(212, 160, 74, 0.30);
-}
-
-/* =========================================================
-   STAR FLARE
-   ========================================================= */
-
-.spark::before,
-.spark::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  background: rgba(255, 250, 225, 0.98);
-
-  opacity: 0;
-
-  transform:
-    translate(-50%, -50%)
-    scale(0);
-
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease;
-}
-
-.spark::before {
-  width: 16px;
-  height: 1px;
-}
-
-.spark::after {
-  width: 1px;
-  height: 16px;
-}
-
-.spark.is-shining::before,
-.spark.is-shining::after {
-  opacity: 0.9;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1);
-}
-
-/* =========================================================
-   ACCESSIBILITY
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .spark,
-  .spark::before,
-  .spark::after {
-    transition: none;
-  }
-
-  .spark {
-    opacity: 0;
-  }
-}
-
-/* =========================================================
    MOBILE
    ========================================================= */
 
@@ -299,18 +95,5 @@ body {
 
     background-size: contain;
     background-position: center top;
-  }
-
-  .spark {
-    width: 4px;
-    height: 4px;
-  }
-
-  .spark::before {
-    width: 11px;
-  }
-
-  .spark::after {
-    height: 11px;
   }
 }
