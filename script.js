@@ -1,283 +1,120 @@
-/* =========================================================
-   NU ESSENCE — RANDOM GOLD RING TWINKLES
-
-   The gold ring itself never moves.
-
-   Eight fixed points sit directly on the ring.
-
-   JavaScript randomly chooses which point catches the light,
-   makes it shine briefly, then fades it back into the gold.
-
-   There is NO clockwise sequence.
-   There is NO rotation.
-   ========================================================= */
+// =========================================================
+// NU ESSENCE — RANDOM RING FRAME CROSSFADE
+//
+// Uses 10 transparent ring-only PNGs.
+// The hero background never changes.
+// A random ring frame fades in, holds, fades out,
+// then another random frame appears.
+// =========================================================
 
 (function () {
+  var artOverlay = document.querySelector(".hero-art-overlay");
+  var hero = document.querySelector(".hero");
+  var mountPoint = artOverlay || hero;
 
-  const sparks = Array.from(
-    document.querySelectorAll(".orbit-glow .spark")
-  );
+  if (!mountPoint) return;
 
+  var FRAME_COUNT = 10;
+  var FRAME_PATH = "assets/ring-frames/ring-";
 
-  if (!sparks.length) {
-    return;
+  // Hold each reflection for a random 3–6.5 seconds
+  var MIN_HOLD = 3000;
+  var MAX_HOLD = 6500;
+
+  // Must match the CSS transition duration
+  var FADE_MS = 1600;
+
+  var frames = [];
+
+  for (var i = 1; i <= FRAME_COUNT; i++) {
+    frames.push(
+      FRAME_PATH +
+      String(i).padStart(2, "0") +
+      ".png"
+    );
   }
 
+  // Preload all images to avoid flashing/loading gaps.
+  frames.forEach(function (src) {
+    var img = new Image();
+    img.src = src;
+  });
 
-  /* =======================================================
-     ACCESSIBILITY
-     ======================================================= */
+  // Build the two-layer crossfade container.
+  var container = document.createElement("div");
+  container.className = "ring-shine-cycle";
+  container.setAttribute("aria-hidden", "true");
 
-  const reducedMotion = window.matchMedia(
+  var layerA = document.createElement("div");
+  var layerB = document.createElement("div");
+
+  layerA.className = "ring-shine-layer";
+  layerB.className = "ring-shine-layer";
+
+  container.appendChild(layerA);
+  container.appendChild(layerB);
+  mountPoint.appendChild(container);
+
+  var reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
-  );
+  ).matches;
 
+  var lastIndex = -1;
 
-  if (reducedMotion.matches) {
-    return;
+  function pickNextIndex() {
+    var next;
+
+    do {
+      next = Math.floor(Math.random() * FRAME_COUNT);
+    } while (next === lastIndex);
+
+    lastIndex = next;
+    return next;
   }
 
+  var active = layerA;
+  var inactive = layerB;
 
-  /* =======================================================
-     SETTINGS
-     ======================================================= */
+  // Show the first random frame.
+  active.style.backgroundImage =
+    "url('" + frames[pickNextIndex()] + "')";
 
-  /*
-    Delay between twinkles.
+  active.classList.add("is-active");
 
-    Example:
-    one sparkle happens,
-    then approximately 0.8–3 seconds before another.
-  */
+  if (reduceMotion) return;
 
-  const MIN_WAIT = 800;
-  const MAX_WAIT = 3000;
+  function swap() {
+    // Fade current ring down.
+    active.classList.remove("is-active");
 
+    setTimeout(function () {
+      // Change the hidden layer to a different random reflection.
+      var nextSrc = frames[pickNextIndex()];
 
-  /*
-    How long one reflection remains bright.
-  */
+      inactive.style.backgroundImage =
+        "url('" + nextSrc + "')";
 
-  const MIN_SHINE = 280;
-  const MAX_SHINE = 750;
+      // Force the browser to register the hidden state.
+      void inactive.offsetWidth;
 
+      // Fade the new reflection in.
+      inactive.classList.add("is-active");
 
-  /*
-    Occasionally allow a second location to catch
-    the light shortly after the first.
+      var temp = active;
+      active = inactive;
+      inactive = temp;
 
-    0.18 = 18% chance.
-  */
+      var hold =
+        MIN_HOLD +
+        Math.random() * (MAX_HOLD - MIN_HOLD);
 
-  const DOUBLE_SPARK_CHANCE = 0.18;
-
-
-  /*
-    Very rarely create a stronger jewelry-like twinkle.
-  */
-
-  const STRONG_SPARK_CHANCE = 0.20;
-
-
-  /* =======================================================
-     UTILITIES
-     ======================================================= */
-
-  function randomBetween(min, max) {
-
-    return (
-      Math.random() *
-      (max - min) +
-      min
-    );
-
+      setTimeout(swap, hold);
+    }, FADE_MS);
   }
 
-
-  function randomSpark(exclude) {
-
-    const available = sparks.filter(
-      function (spark) {
-        return spark !== exclude;
-      }
-    );
-
-
-    return available[
-      Math.floor(
-        Math.random() *
-        available.length
-      )
-    ];
-
-  }
-
-
-  /* =======================================================
-     SHINE ONE LOCATION
-     ======================================================= */
-
-  function shine(spark) {
-
-    if (!spark) {
-      return;
-    }
-
-
-    /*
-      Restart cleanly if this sparkle happened recently.
-    */
-
-    spark.classList.remove(
-      "is-shining",
-      "is-strong"
-    );
-
-
-    void spark.offsetWidth;
-
-
-    spark.classList.add(
-      "is-shining"
-    );
-
-
-    /*
-      Occasionally boost the intensity slightly.
-    */
-
-    if (
-      Math.random() <
-      STRONG_SPARK_CHANCE
-    ) {
-
-      spark.classList.add(
-        "is-strong"
-      );
-
-    }
-
-
-    const shineTime =
-      randomBetween(
-        MIN_SHINE,
-        MAX_SHINE
-      );
-
-
-    window.setTimeout(
-      function () {
-
-        spark.classList.remove(
-          "is-shining",
-          "is-strong"
-        );
-
-      },
-
-      shineTime
-    );
-
-  }
-
-
-  /* =======================================================
-     RANDOM TWINKLE LOOP
-     ======================================================= */
-
-  let previousSpark = null;
-
-
-  function scheduleNextSpark() {
-
-    const waitTime =
-      randomBetween(
-        MIN_WAIT,
-        MAX_WAIT
-      );
-
-
-    window.setTimeout(
-      function () {
-
-        /*
-          Pick a random sparkle.
-
-          Avoid using the exact same location
-          twice in a row.
-        */
-
-        const selectedSpark =
-          randomSpark(
-            previousSpark
-          );
-
-
-        shine(
-          selectedSpark
-        );
-
-
-        previousSpark =
-          selectedSpark;
-
-
-        /*
-          Occasionally another part of the ring
-          catches the light shortly afterward.
-        */
-
-        if (
-          Math.random() <
-          DOUBLE_SPARK_CHANCE
-        ) {
-
-          const secondSpark =
-            randomSpark(
-              selectedSpark
-            );
-
-
-          const secondDelay =
-            randomBetween(
-              140,
-              500
-            );
-
-
-          window.setTimeout(
-            function () {
-
-              shine(
-                secondSpark
-              );
-
-            },
-
-            secondDelay
-          );
-
-        }
-
-
-        /*
-          Schedule another completely random event.
-        */
-
-        scheduleNextSpark();
-
-      },
-
-      waitTime
-    );
-
-  }
-
-
-  /* =======================================================
-     START
-     ======================================================= */
-
-  scheduleNextSpark();
-
+  var firstHold =
+    MIN_HOLD +
+    Math.random() * (MAX_HOLD - MIN_HOLD);
+
+  setTimeout(swap, firstHold);
 })();
