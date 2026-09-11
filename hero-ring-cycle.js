@@ -14,7 +14,7 @@
   var CACHE_BUST = "?v=2"; // forces a fresh fetch, bypassing any stale CDN-cached 404s
   var MIN_HOLD = 3000;
   var MAX_HOLD = 6500;
-  var FADE_MS = 1600; // must match .ring-shine-layer's CSS transition duration
+  var FADE_MS = 3600; // must match .ring-shine-layer's CSS transition duration
  
   var frames = [];
   for (var i = 1; i <= FRAME_COUNT; i++) {
