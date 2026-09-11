@@ -12,7 +12,7 @@
   overflow: hidden;
   isolation: isolate;
 
-  background-image: url("assets/hero-base-no-ring.jpg");
+  background-image: url("hero-base-no-ring.jpg");
   background-repeat: no-repeat;
   background-size: 98% auto;
   background-position: center center;
