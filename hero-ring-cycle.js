@@ -1,7 +1,10 @@
-// Crossfades the two .ring-shine-layer divs already sitting inside
-// .ring-shine-cycle (inside .ring-wrapper) between 10 transparent,
-// self-contained ring-only frames. Nothing about the backdrop or the
-// static NE monogram is touched — only the ring glow layers.
+// Crossfades the two .ring-shine-layer divs (direct children of .hero,
+// full hero-size) between 10 transparent, self-contained ring frames
+// (the user's own rotating-highlight ring art). Each frame is recomposited
+// onto a full 1672x941 canvas at the ring's exact measured position/radius
+// in hero-base-no-ring.jpg — so it always lines up with the baked-in ring,
+// at any viewport width. Nothing about the backdrop or the static NE
+// monogram is touched — only the ring glow layers.
 (function () {
   var container = document.querySelector(".ring-shine-cycle");
   if (!container) return;
@@ -12,8 +15,8 @@
   if (!layerA || !layerB) return;
 
   var FRAME_COUNT = 10;
-  var FRAME_PATH = "ring-";
-  var CACHE_BUST = "?v=1";
+  var FRAME_PATH = "ring-anim-";
+  var CACHE_BUST = "?v=3";
   var MIN_HOLD = 3000;
   var MAX_HOLD = 6500;
   var FADE_MS = 3200; // must match .ring-shine-layer's CSS transition duration

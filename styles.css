@@ -304,33 +304,26 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 }
 
 /* ===================== Ring / logo area =====================
-   Positioned to sit exactly over the gold ring baked into
-   hero-base-no-ring.jpg: measured center at 53.35% / 42.5% of the
-   image, ring diameter ~23.3% of image width. The outer orbit
-   circles, dotted arc and sparkle dust are all part of the image
-   itself — only the crossfading shine layers and the static NE
-   monogram are added here, on top. */
-.hero-logo-area {
-  position: absolute;
-  left: 53.35%;
-  top: 39.6%;
-  transform: translate(-50%, -50%);
-  z-index: 6;
-  width: 26.9%;
-  aspect-ratio: 1;
-}
+   The glowing ring is now a full-hero-size transparent PNG
+   (ring-anim-01..12.png, 1672x941 — the exact pixel dimensions of
+   hero-base-no-ring.jpg) drawn programmatically at the ring's
+   measured real center/radius (894,389 / r170-214 px in the source
+   photo = 53.47% / 41.34%). Because it shares the source image's
+   exact aspect ratio and is stretched over the same box as
+   hero-bg-image, it lines up with the baked-in ring at every
+   viewport width with no separate percentage math to keep in sync —
+   only the ring's own crop position ever needs to match .hero's.
+   The static NE monogram is a separate, independently-sized layer
+   centered on the same point.
 
-.ring-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+   .logo-badge wraps both (see index.html) purely so the mobile
+   breakpoint below can turn them into one plain, self-contained
+   circle badge — on desktop it renders no box of its own, so
+   .ring-shine-cycle and .hero-logo-area position against .hero
+   directly, exactly as if they were its own children. */
+.logo-badge {
+  display: contents;
 }
-/*
-  KEEP THIS WRAPPER.
-  The glowing ring animation lives entirely inside it — see the
-  .ring-shine-cycle / .ring-shine-layer rules below and
-  hero-ring-cycle.js, which mounts into .ring-wrapper.
-*/
 
 .ring-shine-cycle {
   position: absolute;
@@ -344,12 +337,22 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   inset: 0;
 
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   background-position: center;
-  filter: blur(4px);
+  filter: blur(1px);
 
   opacity: 0;
   transition: opacity 3.2s cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.hero-logo-area {
+  position: absolute;
+  left: 53.47%;
+  top: 41.34%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: 26.9%;
+  aspect-ratio: 1;
 }
 
 .ring-shine-layer.is-active {
@@ -578,7 +581,6 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   }
   .site-header { position: relative; }
   .hero-copy,
-  .hero-logo-area,
   .trust-panel,
   .hero-right {
     position: relative;
@@ -591,10 +593,27 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
     max-width: none;
   }
   .hero-copy { margin: 40px 6vw 0; }
-  .hero-logo-area {
+
+  /* Below this breakpoint, the ring is no longer matching any baked-in
+     background art (the background photo is cropped away from the ring
+     entirely — see .hero-bg-image object-position above), so it becomes
+     a plain self-contained badge: .logo-badge gets its own box, and the
+     full-hero-shaped ring frames are cropped to fit it with cover. */
+  .logo-badge {
+    display: block;
+    position: relative;
     width: min(56vw, 320px);
+    aspect-ratio: 1;
     margin: 40px auto 0;
   }
+  .hero-logo-area {
+    position: absolute;
+    inset: 0;
+    transform: none;
+    width: auto;
+  }
+  .ring-shine-layer { background-size: cover; }
+
   .trust-panel { margin: 40px 6vw 0; }
   .hero-right {
     margin: 56px 6vw 0;
@@ -610,6 +629,6 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   .trust-panel { grid-template-columns: 1fr; }
   .trust-card { border-right: none; border-bottom: 1px solid rgba(203, 146, 67, 0.2); }
   .trust-card:last-child { border-bottom: none; }
-  .hero-logo-area { width: min(70vw, 280px); }
+  .logo-badge { width: min(70vw, 280px); }
   .hero-ctas { margin-bottom: 24px; }
 }
