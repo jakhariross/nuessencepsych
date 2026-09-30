@@ -377,10 +377,10 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   position: absolute;
 
   left: 50%;
-  top: 50%;
+  top: 49%;
 
-  width: 72%;
-  height: 72%;
+  width: 70%;
+  height: 70%;
 
   transform: translate(-50%, -50%);
 
