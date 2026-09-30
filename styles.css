@@ -389,7 +389,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   z-index: 5;
   pointer-events: none;
 
-  /* Makes the black background blend into the hero */
+   /* Makes the black background blend into the hero */
   mix-blend-mode: screen;
 
   /* Feather the outer edge */
@@ -411,6 +411,10 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
     rgba(0, 0, 0, 0.55) 94%,
     rgba(0, 0, 0, 0.2) 98%,
     transparent 100%
+  );
+
+  z-index: 5;
+  pointer-events: none;
   );
 
   z-index: 5;
