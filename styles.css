@@ -390,21 +390,23 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   pointer-events: none;
 
  /* soften the outside edge */
-  -webkit-mask-image: radial-gradient(
+ -webkit-mask-image: radial-gradient(
     circle,
     black 0%,
-    black 88%,
-    rgba(0, 0, 0, 0.95) 93%,
-    rgba(0, 0, 0, 0.55) 97%,
+    black 90%,
+    rgba(0, 0, 0, 0.92) 94%,
+    rgba(0, 0, 0, 0.65) 97%,
+    rgba(0, 0, 0, 0.25) 99%,
     transparent 100%
   );
 
   mask-image: radial-gradient(
     circle,
     black 0%,
-    black 88%,
-    rgba(0, 0, 0, 0.95) 93%,
-    rgba(0, 0, 0, 0.55) 97%,
+    black 90%,
+    rgba(0, 0, 0, 0.92) 94%,
+    rgba(0, 0, 0, 0.65) 97%,
+    rgba(0, 0, 0, 0.25) 99%,
     transparent 100%
   );
 
