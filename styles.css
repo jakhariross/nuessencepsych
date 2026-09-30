@@ -344,7 +344,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
      (not cropped to the photo below 1024px, see the mobile override),
      so it and the monogram can be moved as one unit, away from the
      photo's own baked-in ring, per request. Reset to none on mobile. */
-  transform: translateX(-0.9%);
+  transform: translateX(1.1%);
 
   opacity: 0;
   transition: opacity 3.2s cubic-bezier(0.33, 0, 0.2, 1);
