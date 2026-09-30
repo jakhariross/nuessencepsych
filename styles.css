@@ -340,6 +340,11 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   background-size: 100% 100%;
   background-position: center;
   filter: blur(1px);
+  /* Desktop-only nudge: the ring is a self-contained generated layer
+     (not cropped to the photo below 1024px, see the mobile override),
+     so it and the monogram can be moved as one unit, away from the
+     photo's own baked-in ring, per request. Reset to none on mobile. */
+  transform: translateX(-2%);
 
   opacity: 0;
   transition: opacity 3.2s cubic-bezier(0.33, 0, 0.2, 1);
@@ -347,7 +352,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 
 .hero-logo-area {
   position: absolute;
-  left: 53.47%;
+  left: 51.47%;
   top: 41.34%;
   transform: translate(-50%, -50%);
   z-index: 6;
@@ -612,7 +617,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
     transform: none;
     width: auto;
   }
-  .ring-shine-layer { background-size: cover; }
+  .ring-shine-layer { background-size: cover; transform: none; }
 
   .trust-panel { margin: 40px 6vw 0; }
   .hero-right {
