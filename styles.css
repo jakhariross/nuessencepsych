@@ -376,14 +376,13 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 .hero-logo {
   position: absolute;
 
-  /* lock the left/top where they are now */
-  left: 12%;
-  top: 12%;
+  top: 11%;
+  left: 13%;
+  right: 7%;
+  bottom: 9%;
 
-  /* grow toward the right + bottom */
-  width: 82%;
+  width: auto;
   height: auto;
-
   object-fit: contain;
 
   z-index: 5;
