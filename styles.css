@@ -377,7 +377,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   position: absolute;
 
   left: 53%;
-  top: 51%;
+  top: 50.5%;
 
   width: 75%;
   height: 72%;
@@ -390,24 +390,24 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   pointer-events: none;
 
  /* soften the outside edge */
- -webkit-mask-image: radial-gradient(
-    circle,
-    black 0%,
-    black 90%,
-    rgba(0, 0, 0, 0.92) 94%,
-    rgba(0, 0, 0, 0.65) 97%,
-    rgba(0, 0, 0, 0.25) 99%,
-    transparent 100%
-  );
+-webkit-mask-image: radial-gradient(
+  circle,
+  black 0%,
+  black 87%,
+  rgba(0, 0, 0, 0.92) 92%,
+  rgba(0, 0, 0, 0.55) 96%,
+  rgba(0, 0, 0, 0.2) 99%,
+  transparent 100%
+);
 
-  mask-image: radial-gradient(
-    circle,
-    black 0%,
-    black 90%,
-    rgba(0, 0, 0, 0.92) 94%,
-    rgba(0, 0, 0, 0.65) 97%,
-    rgba(0, 0, 0, 0.25) 99%,
-    transparent 100%
+mask-image: radial-gradient(
+  circle,
+  black 0%,
+  black 87%,
+  rgba(0, 0, 0, 0.92) 92%,
+  rgba(0, 0, 0, 0.55) 96%,
+  rgba(0, 0, 0, 0.2) 99%,
+  transparent 100%
   );
 
   z-index: 5;
