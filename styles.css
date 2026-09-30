@@ -376,10 +376,10 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 .hero-logo {
   position: absolute;
 
-  left: 50.7%;
-  top: 49.3%;
+  left: 60%;
+  top: 51%;
 
-  width: 72%;
+  width: 75%;
   height: 72%;
 
   transform: translate(-50%, -50%);
