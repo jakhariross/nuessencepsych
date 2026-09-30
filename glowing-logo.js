@@ -9,8 +9,8 @@
 
   const FRAME_COUNT = 10;
   const FRAME_FOLDER = "assets/ring-frames/";
-  const MIN_HOLD = 6000;
-  const MAX_HOLD = 10000;
+  const MIN_HOLD = 10000;
+  const MAX_HOLD = 16000;
   const FADE_TIME = 4000;
 
   const frames = [];
