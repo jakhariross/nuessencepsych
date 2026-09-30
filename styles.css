@@ -375,20 +375,12 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 
 .hero-logo {
   position: absolute;
-
-  left: 50%;
-  top: 49%;
-
-  width: 72%;
-  height: 72%;
-
-  transform: translate(-50%, -50%);
-
+  inset: 10% 10% 10% 10%;
   object-fit: contain;
-
   z-index: 5;
   pointer-events: none;
 }
+ 
 
 /* ===================== Trust panel =====================
    Sits low and left, over the gold particle-wave texture that's
