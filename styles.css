@@ -344,7 +344,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
      (not cropped to the photo below 1024px, see the mobile override),
      so it and the monogram can be moved as one unit, away from the
      photo's own baked-in ring, per request. Reset to none on mobile. */
-  transform: translateX(-0.15%);
+  transform: none;
 
   opacity: 0;
   transition: opacity 3.2s cubic-bezier(0.33, 0, 0.2, 1);
@@ -352,7 +352,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 
 .hero-logo-area {
   position: absolute;
-  left: 52.47%;
+  left: 53.47%;
   top: 41.34%;
   transform: translate(-50%, -50%);
   z-index: 6;
@@ -371,16 +371,19 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 .hero-logo {
   position: absolute;
 
-  top: 8%;
-  left: 8%;
+  left: 50%;
+  top: 50%;
 
-  width: 86%;
-  height: 86%;
+  width: 76%;
+  height: 76%;
+
+  transform: translate(-50%, -50%);
 
   object-fit: contain;
 
   z-index: 5;
   pointer-events: none;
+
 }
 
 /* ===================== Trust panel =====================
