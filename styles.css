@@ -382,7 +382,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   width: 75%;
   height: 72%;
 
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.08);
 
   object-fit: contain;
 
