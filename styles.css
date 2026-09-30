@@ -389,6 +389,8 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   z-index: 5;
   pointer-events: none;
 
+   opacity: 0.92;
+
    /* Makes the black background blend into the hero */
   mix-blend-mode: screen;
 
