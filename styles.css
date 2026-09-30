@@ -370,12 +370,17 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
 
 .hero-logo {
   position: absolute;
-  inset: 8%;
-  width: 70%;
-  height: 70%;
+
+  top: 8%;
+  left: 8%;
+
+  width: 86%;
+  height: 86%;
+
   object-fit: contain;
-  margin: auto;
+
   z-index: 5;
+  pointer-events: none;
 }
 
 /* ===================== Trust panel =====================
