@@ -679,3 +679,46 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   .logo-badge { width: min(70vw, 280px); }
   .hero-ctas { margin-bottom: 24px; }
 }
+
+
+
+/* =========================================================
+   ONE-SCREEN HOMEPAGE
+   Keep hero artwork alignment + footer visible
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+}
+
+/* Keep the existing hero proportions */
+.hero {
+  width: 100%;
+  max-height: calc(100vh - 42px);
+}
+
+/* Slim footer so it stays inside the viewport */
+.footer-strip {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 42px;
+  padding: 0 clamp(20px, 4vw, 56px);
+  z-index: 50;
+  flex-wrap: nowrap;
+}
+
+/* Prevent footer text from making it taller */
+.footer-tagline,
+.footer-brand {
+  white-space: nowrap;
+}
