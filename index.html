@@ -2,6 +2,128 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+  /* MOBILE MENU */
+
+  .mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+
+    .mobile-nav {
+      position: absolute;
+      top: 76px;
+      right: 18px;
+      z-index: 9999;
+
+      width: min(270px, calc(100% - 36px));
+
+      padding: 10px;
+
+      background: rgba(11, 12, 14, 0.98);
+      border: 1px solid rgba(203, 146, 67, 0.45);
+      border-radius: 16px;
+
+      box-shadow: 0 18px 50px rgba(0,0,0,.55);
+
+      flex-direction: column;
+    }
+
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 14px 16px;
+
+      color: #f1ede4;
+
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+
+      border-bottom: 1px solid rgba(203,146,67,.15);
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav a.active {
+      color: #ffe3ad;
+    }
+
+
+    /* TWINKLES */
+
+    .mobile-twinkle-layer {
+      display: block;
+      position: absolute;
+      inset: 0 auto auto 0;
+
+      width: 100%;
+      height: 1100px;
+
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .twinkle {
+      position: absolute;
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #ffd277;
+
+      box-shadow:
+        0 0 6px #ffd277,
+        0 0 16px rgba(255, 190, 70, .9),
+        0 0 28px rgba(255, 160, 30, .6);
+
+      animation: nuTwinkle 4s ease-in-out infinite;
+    }
+
+    .t1 { top: 15%; left: 18%; animation-delay: 0s; }
+    .t2 { top: 22%; left: 78%; animation-delay: .7s; }
+    .t3 { top: 31%; left: 12%; animation-delay: 1.4s; }
+    .t4 { top: 40%; left: 68%; animation-delay: 2.1s; }
+    .t5 { top: 50%; left: 31%; animation-delay: 2.8s; }
+    .t6 { top: 58%; left: 86%; animation-delay: 3.5s; }
+    .t7 { top: 67%; left: 17%; animation-delay: 1.1s; }
+    .t8 { top: 74%; left: 72%; animation-delay: 2.4s; }
+
+    @keyframes nuTwinkle {
+      0%, 70%, 100% {
+        opacity: .1;
+        transform: scale(.6);
+      }
+
+      82% {
+        opacity: 1;
+        transform: scale(2.2);
+      }
+
+      90% {
+        opacity: .35;
+        transform: scale(1);
+      }
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .mobile-twinkle-layer {
+      display: none;
+    }
+  }
+</style>
+
+
+  
 <head>
   <meta charset="UTF-8">
 
