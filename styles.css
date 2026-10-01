@@ -815,7 +815,15 @@ body.home-page .trust-card h3 {
   }
 }
 
+
+/* =========================================================
+   MOBILE PHONE LAYOUT
+   Black + gold theme
+   ========================================================= */
+
 @media (max-width: 680px) {
+
+  /* HEADER */
 
   body.home-page .site-header {
     padding: 16px 18px;
@@ -852,5 +860,104 @@ body.home-page .trust-card h3 {
 
   body.home-page .nav-toggle {
     padding: 5px;
+  }
+
+
+  /* HERO BACKGROUND */
+
+  body.home-page .hero-bg-image {
+    object-position: 18% top;
+  }
+
+
+  /* REMOVE STANDALONE CENTER LOGO */
+
+  body.home-page .logo-badge {
+    display: none;
+  }
+
+
+  /* CARE THAT EVOLVES */
+
+  body.home-page .hero-right {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin: 0;
+    padding: 42px 24px 48px;
+    background: var(--nu-black);
+    color: var(--text-light);
+    border-radius: 0;
+    border-top: 1px solid rgba(203, 146, 67, 0.25);
+  }
+
+  body.home-page .hero-right .eyebrow {
+    color: var(--gold);
+  }
+
+  body.home-page .hero-right h2 {
+    color: var(--text-light);
+  }
+
+  body.home-page .hero-right .description {
+    color: var(--text-muted-light);
+  }
+
+
+  /* SERVICE CARDS */
+
+  body.home-page .service-card {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(203, 146, 67, 0.3);
+    color: var(--text-light);
+  }
+
+  body.home-page .service-card:hover {
+    background: rgba(203, 146, 67, 0.08);
+  }
+
+  body.home-page .service-text h3 {
+    color: var(--text-light);
+  }
+
+  body.home-page .service-text p {
+    color: var(--text-muted-light);
+  }
+
+  body.home-page .service-icon {
+    background: rgba(203, 146, 67, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(203, 146, 67, 0.22);
+  }
+
+  body.home-page .chev-circle {
+    color: var(--gold);
+    border-color: rgba(203, 146, 67, 0.45);
+  }
+
+
+  /* FOOTER */
+
+  body.home-page .footer-strip {
+    justify-content: center;
+    text-align: center;
+    padding: 20px 18px;
+  }
+
+  body.home-page .footer-tagline {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  body.home-page .footer-lotus {
+    margin: 0 auto;
+  }
+
+  body.home-page .footer-brand {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
   }
 }
