@@ -961,3 +961,68 @@ body.home-page .trust-card h3 {
     margin: 0 auto;
   }
 }
+
+/* =========================================================
+   MOBILE LANDSCAPE — KEEP BLACK / GOLD
+   ========================================================= */
+
+@media (max-width: 1024px) and (orientation: landscape) {
+
+  body.home-page .hero {
+    overflow: hidden;
+  }
+
+  /* Enlarge/crop existing artwork so cream side stays off-screen */
+  body.home-page .hero-bg-image {
+    width: 145%;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+
+  /* Hide standalone logo in landscape too */
+  body.home-page .logo-badge {
+    display: none;
+  }
+
+  /* Keep Care That Evolves black/gold */
+  body.home-page .hero-right {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin: 0;
+    padding: 36px 28px 44px;
+    background: var(--nu-black);
+    color: var(--text-light);
+    border-radius: 0;
+    border-top: 1px solid rgba(203, 146, 67, 0.25);
+  }
+
+  body.home-page .hero-right .eyebrow {
+    color: var(--gold);
+  }
+
+  body.home-page .hero-right h2 {
+    color: var(--text-light);
+  }
+
+  body.home-page .hero-right .description {
+    color: var(--text-muted-light);
+  }
+
+  body.home-page .service-card {
+    background: rgba(255, 255, 255, 0.035);
+    border-color: rgba(203, 146, 67, 0.3);
+  }
+
+  body.home-page .service-text h3 {
+    color: var(--text-light);
+  }
+
+  body.home-page .service-text p {
+    color: var(--text-muted-light);
+  }
+}
