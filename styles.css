@@ -1052,4 +1052,212 @@ body.home-page .trust-card h3 {
     color: var(--text-muted-light);
   }
 }
+/* =========================================================
+   MOBILE HAMBURGER MENU
+   ========================================================= */
 
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+
+  .mobile-nav {
+    position: absolute;
+    top: 78px;
+    right: 18px;
+    z-index: 100;
+
+    width: min(270px, calc(100% - 36px));
+
+    padding: 10px;
+
+    background: rgba(11, 12, 14, 0.97);
+    border: 1px solid rgba(203, 146, 67, 0.4);
+    border-radius: 16px;
+
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-8px);
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s ease;
+  }
+
+  .mobile-nav.is-open {
+    display: flex;
+    flex-direction: column;
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+  }
+
+  .mobile-nav a {
+    display: flex;
+    align-items: center;
+
+    min-height: 46px;
+
+    padding: 0 16px;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+
+    border-bottom: 1px solid rgba(203, 146, 67, 0.14);
+  }
+
+  .mobile-nav a:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav a:hover,
+  .mobile-nav a.active {
+    color: var(--gold-bright);
+    background: rgba(203, 146, 67, 0.07);
+  }
+}
+
+
+/* =========================================================
+   MOBILE STAR TWINKLE
+   ========================================================= */
+
+.mobile-twinkle-layer {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+
+  .mobile-twinkle-layer {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 1100px;
+
+    z-index: 2;
+
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .twinkle {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #ffd277;
+
+    opacity: 0.08;
+
+    box-shadow:
+      0 0 5px #ffd277,
+      0 0 12px rgba(255, 190, 70, 0.8),
+      0 0 22px rgba(255, 160, 30, 0.45);
+
+    animation: nuTwinkle 7s ease-in-out infinite;
+  }
+
+  .t1 {
+    top: 15%;
+    left: 18%;
+    animation-delay: 0s;
+  }
+
+  .t2 {
+    top: 22%;
+    left: 78%;
+    animation-delay: 2.1s;
+  }
+
+  .t3 {
+    top: 31%;
+    left: 12%;
+    animation-delay: 4.6s;
+  }
+
+  .t4 {
+    top: 40%;
+    left: 68%;
+    animation-delay: 1.2s;
+  }
+
+  .t5 {
+    top: 50%;
+    left: 31%;
+    animation-delay: 3.7s;
+  }
+
+  .t6 {
+    top: 58%;
+    left: 86%;
+    animation-delay: 5.8s;
+  }
+
+  .t7 {
+    top: 67%;
+    left: 17%;
+    animation-delay: 2.9s;
+  }
+
+  .t8 {
+    top: 74%;
+    left: 72%;
+    animation-delay: 6.5s;
+  }
+
+  @keyframes nuTwinkle {
+
+    0%,
+    78%,
+    100% {
+      opacity: 0.08;
+      transform: scale(0.65);
+    }
+
+    84% {
+      opacity: 0.75;
+      transform: scale(1.4);
+    }
+
+    88% {
+      opacity: 1;
+      transform: scale(2);
+    }
+
+    93% {
+      opacity: 0.25;
+      transform: scale(1);
+    }
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .twinkle {
+    animation: none;
+    opacity: 0.18;
+  }
+}
