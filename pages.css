@@ -316,3 +316,32 @@ body.inner-page .cta-band .btn-primary {
   }
 
 }
+
+/* =========================================================
+   INNER PAGE FULL-SCREEN BALANCE
+   ========================================================= */
+
+body.inner-page {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.inner-page .inner-header {
+  flex-shrink: 0;
+}
+
+body.inner-page .page-hero,
+body.inner-page .section {
+  flex-shrink: 0;
+}
+
+body.inner-page .section.ivory {
+  flex-grow: 1;
+}
+
+body.inner-page .footer-strip {
+  margin-top: auto;
+  flex-shrink: 0;
+}
