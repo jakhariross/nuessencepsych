@@ -723,15 +723,15 @@ body.home-page .footer-brand {
 
 
 /* =========================================================
-   HOMEPAGE FIT ADJUSTMENTS
+   HOMEPAGE POSITION TUNING
    ========================================================= */
 
-/* Move the right column slightly upward */
+/* Bring the right-side care section down slightly */
 body.home-page .hero-right {
-  top: 7.5%;
+  top: 9%;
 }
 
-/* Tighten the service stack just enough to clear footer */
+/* Keep the service cards compact enough to clear the footer */
 body.home-page .service-list {
   gap: 7px;
 }
@@ -746,4 +746,23 @@ body.home-page .hero-right .description {
 
 body.home-page .hero-right .ornament {
   margin: 10px 0 12px;
+}
+
+
+/* Move the three bottom trust boxes UP away from footer */
+body.home-page .trust-panel {
+  top: 72.5%;
+}
+
+/* Slightly tighten their vertical height */
+body.home-page .trust-card {
+  padding: 18px 20px;
+}
+
+body.home-page .trust-card svg {
+  margin-bottom: 8px;
+}
+
+body.home-page .trust-card h3 {
+  margin-bottom: 4px;
 }
