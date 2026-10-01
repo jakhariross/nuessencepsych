@@ -476,12 +476,9 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
    topmost point is ~74.8% of the image width, so 76% leaves a safe
    margin at every point along the panel's height (the seam only
    moves further left, i.e. further from this text, lower down). */
-.hero-right {
-  position: absolute;
-  left: 76%;
-  top: 9%;
-  width: 21%;
-  z-index: 3;
+/* Move the entire right-side care section lower */
+body.home-page .hero-right {
+  top: 14.5%;
 }
 
 .right-inner {
