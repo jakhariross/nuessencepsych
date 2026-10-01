@@ -297,10 +297,11 @@
 
 
     <button
-      class="nav-toggle"
-      aria-label="Open menu"
-      aria-expanded="false"
-    >
+  type="button"
+  class="nav-toggle"
+  aria-label="Open menu"
+  aria-expanded="false"
+>
 
       <svg
         width="18"
@@ -832,32 +833,38 @@ document.addEventListener("DOMContentLoaded", function () {
   const mobileNav = document.querySelector(".mobile-nav");
 
   if (!toggle || !mobileNav) {
-    console.log("Mobile menu elements not found.");
+    console.log("Hamburger elements not found");
     return;
   }
+
+  mobileNav.style.display = "none";
 
   toggle.addEventListener("click", function (event) {
     event.preventDefault();
     event.stopPropagation();
 
-    mobileNav.classList.toggle("is-open");
+    const isOpen = mobileNav.style.display === "flex";
 
-    const isOpen = mobileNav.classList.contains("is-open");
-
-    toggle.setAttribute(
-      "aria-expanded",
-      isOpen ? "true" : "false"
-    );
+    if (isOpen) {
+      mobileNav.style.display = "none";
+      toggle.setAttribute("aria-expanded", "false");
+    } else {
+      mobileNav.style.display = "flex";
+      mobileNav.style.flexDirection = "column";
+      toggle.setAttribute("aria-expanded", "true");
+    }
   });
 
   document.addEventListener("click", function (event) {
+
     if (
       !mobileNav.contains(event.target) &&
       !toggle.contains(event.target)
     ) {
-      mobileNav.classList.remove("is-open");
+      mobileNav.style.display = "none";
       toggle.setAttribute("aria-expanded", "false");
     }
+
   });
 
 });
