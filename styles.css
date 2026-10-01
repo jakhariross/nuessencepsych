@@ -477,17 +477,14 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
    margin at every point along the panel's height (the seam only
    moves further left, i.e. further from this text, lower down). */
 /* Move the entire right-side care section lower */
-body.home-page .hero-right {
-  top: 14.5%;
-}
 
-body.home-page .hero-right .eyebrow {
-  font-size: 14px;
-  letter-spacing: 0.32em;
-  font-weight: 500;
-  margin-bottom: 16px;
+.hero-right {
+  position: absolute;
+  left: 76%;
+  top: 9%;
+  width: 21%;
+  z-index: 3;
 }
-
 
 .right-inner {
   width: 100%;
@@ -731,12 +728,20 @@ body.home-page .footer-brand {
    HOMEPAGE POSITION TUNING
    ========================================================= */
 
-/* Bring the right-side care section down slightly */
+/* Move the right-side care section lower */
 body.home-page .hero-right {
-  top: 9%;
+  top: 14.5%;
 }
 
-/* Keep the service cards compact enough to clear the footer */
+/* Make CARE THAT EVOLVES more prominent */
+body.home-page .hero-right .eyebrow {
+  font-size: 14px;
+  letter-spacing: 0.32em;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+/* Keep service cards compact enough to fit */
 body.home-page .service-list {
   gap: 7px;
 }
@@ -753,13 +758,11 @@ body.home-page .hero-right .ornament {
   margin: 10px 0 12px;
 }
 
-
-/* Move the three bottom trust boxes UP away from footer */
+/* Keep the three trust boxes clear of the fixed footer */
 body.home-page .trust-panel {
   top: 72.5%;
 }
 
-/* Slightly tighten their vertical height */
 body.home-page .trust-card {
   padding: 18px 20px;
 }
