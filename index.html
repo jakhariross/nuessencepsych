@@ -825,6 +825,44 @@
 <script src="hero-ring-cycle.js"></script>
 <script src="script.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const toggle = document.querySelector(".nav-toggle");
+  const mobileNav = document.querySelector(".mobile-nav");
+
+  if (!toggle || !mobileNav) {
+    console.log("Mobile menu elements not found.");
+    return;
+  }
+
+  toggle.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    mobileNav.classList.toggle("is-open");
+
+    const isOpen = mobileNav.classList.contains("is-open");
+
+    toggle.setAttribute(
+      "aria-expanded",
+      isOpen ? "true" : "false"
+    );
+  });
+
+  document.addEventListener("click", function (event) {
+    if (
+      !mobileNav.contains(event.target) &&
+      !toggle.contains(event.target)
+    ) {
+      mobileNav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+});
+</script>
+  
 </body>
 </html>
   
