@@ -231,7 +231,21 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
   pointer-events: none;
   user-select: none;
 }
+.hero-bg-picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
+.hero-bg-picture .hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .site-header {
   position: absolute;
   top: 0;
@@ -618,16 +632,14 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; margin: 0; }
     padding-bottom: 40px;
   }
   .hero-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    height: 60vh;
-    min-height: 380px;
-    object-position: 15% 10%;
-  }
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center top;
+}
   .site-header { position: relative; }
   .hero-copy,
   .trust-panel,
@@ -863,13 +875,6 @@ body.home-page .trust-card h3 {
   }
 
 
-  /* HERO BACKGROUND */
-
-  body.home-page .hero-bg-image {
-    object-position: 18% top;
-  }
-
-
   /* REMOVE STANDALONE CENTER LOGO */
 
   body.home-page .logo-badge {
@@ -972,22 +977,21 @@ body.home-page .trust-card h3 {
     overflow: hidden;
   }
 
-  /* Enlarge/crop existing artwork so cream side stays off-screen */
-  body.home-page .hero-bg-image {
-    width: 145%;
-    max-width: none;
+  /* Use the mobile background cleanly in landscape */
+  body.home-page .hero-bg-picture .hero-bg-image {
+    width: 100%;
     height: 100%;
     min-height: 100%;
     object-fit: cover;
-    object-position: left top;
+    object-position: center top;
   }
 
-  /* Hide standalone logo in landscape too */
+  /* Hide standalone center logo */
   body.home-page .logo-badge {
     display: none;
   }
 
-  /* Keep Care That Evolves black/gold */
+  /* Care That Evolves stays black/gold */
   body.home-page .hero-right {
     position: relative;
     left: auto;
@@ -1026,3 +1030,4 @@ body.home-page .trust-card h3 {
     color: var(--text-muted-light);
   }
 }
+
