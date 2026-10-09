@@ -169,8 +169,9 @@ console.log("Nu Essence Psychiatry homepage loaded.");
       "Medication management when appropriate",
       "Ongoing monitoring and support"
     ],
-    image: "url('Depression.png')"
-    imageSize: "88%"
+    image: "url('Depression.png')",
+imageSize: "cover",
+imagePosition: "center center"
   }
   };
 
@@ -215,7 +216,10 @@ console.log("Nu Essence Psychiatry homepage loaded.");
   service.image;
 
 image.style.backgroundSize =
-  service.imageSize || "contain";
+  service.imageSize || "cover";
+
+image.style.backgroundPosition =
+  service.imagePosition || "center";
 
 
     modal.classList.add("is-open");
