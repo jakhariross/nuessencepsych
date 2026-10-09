@@ -19,7 +19,7 @@
   var CACHE_BUST = "?v=3";
   var MIN_HOLD = 3000;
   var MAX_HOLD = 6500;
-  var FADE_MS = 3200; // must match .ring-shine-layer's CSS transition duration
+  var FADE_MS = 3600; // must match .ring-shine-layer's CSS transition duration
 
   var frames = [];
   for (var i = 1; i <= FRAME_COUNT; i++) {
@@ -50,24 +50,25 @@
 
   if (reduceMotion) return;
 
-  function swap() {
-    active.classList.remove("is-active");
+function swap() {
+  var nextSrc = frames[pickNextIndex()];
 
-    setTimeout(function () {
-      var nextSrc = frames[pickNextIndex()];
-      inactive.style.backgroundImage = "url('" + nextSrc + "')";
+  inactive.style.backgroundImage = "url('" + nextSrc + "')";
 
-      void inactive.offsetWidth;
+  void inactive.offsetWidth;
 
-      inactive.classList.add("is-active");
+  inactive.classList.add("is-active");
+  active.classList.remove("is-active");
 
-      var tmp = active;
-      active = inactive;
-      inactive = tmp;
+  setTimeout(function () {
+    var tmp = active;
+    active = inactive;
+    inactive = tmp;
 
-      var hold = MIN_HOLD + Math.random() * (MAX_HOLD - MIN_HOLD);
-      setTimeout(swap, hold);
-    }, FADE_MS);
+    var hold = MIN_HOLD + Math.random() * (MAX_HOLD - MIN_HOLD);
+    setTimeout(swap, hold);
+  }, FADE_MS);
+
   }
 
   var firstHold = MIN_HOLD + Math.random() * (MAX_HOLD - MIN_HOLD);
