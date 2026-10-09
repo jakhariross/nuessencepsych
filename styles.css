@@ -1382,9 +1382,10 @@ body.home-page .trust-card h3 {
   min-height: 570px;
 
 
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  background-color: #0b0c0e;
 
 }
 
