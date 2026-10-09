@@ -108,74 +108,69 @@ console.log("Nu Essence Psychiatry homepage loaded.");
 
   const services = {
 
-    medication: {
-      number: "01",
-      kicker: "Psychiatric Care",
-      title: "Medication Management",
-      intro:
-        "Medication should support your life, not define it. Nu Essence provides thoughtful, individualized psychiatric medication management built around your symptoms, goals, response, and overall well-being.",
-      items: [
-        "Comprehensive medication review",
-        "Individualized treatment planning",
-        "Ongoing effectiveness monitoring",
-        "Side-effect and medication concerns",
-        "Thoughtful follow-up and adjustment"
-      ],
-      image:
-        "linear-gradient(145deg,#17191b,#090a0b 55%,#3a2919)"
-    },
+     medication: {
+    number: "01",
+    kicker: "Psychiatric Care",
+    title: "Medication Management",
+    intro:
+      "Medication should support your life, not define it. Nu Essence provides thoughtful, individualized psychiatric medication management built around your symptoms, goals, response, and overall well-being.",
+    items: [
+      "Comprehensive medication review",
+      "Individualized treatment planning",
+      "Ongoing effectiveness monitoring",
+      "Side-effect and medication concerns",
+      "Thoughtful follow-up and adjustment"
+    ],
+    image: "url('medication_management.png')"
+  },
 
-    adhd: {
-      number: "02",
-      kicker: "Assessment",
-      title: "ADHD Evaluations",
-      intro:
-        "Understanding attention, focus, and executive function starts with a careful evaluation. Our approach looks beyond a checklist to understand how symptoms affect your daily life.",
-      items: [
-        "Detailed clinical assessment",
-        "Attention and executive-function concerns",
-        "Personal and symptom history",
-        "Diagnostic clarification",
-        "Individualized treatment recommendations"
-      ],
-      image:
-        "linear-gradient(145deg,#101315,#1c1813 55%,#6b4b27)"
-    },
+  adhd: {
+    number: "02",
+    kicker: "Assessment",
+    title: "ADHD Evaluations",
+    intro:
+      "Understanding attention, focus, and executive function starts with a careful evaluation. Our approach looks beyond a checklist to understand how symptoms affect your daily life.",
+    items: [
+      "Detailed clinical assessment",
+      "Attention and executive-function concerns",
+      "Personal and symptom history",
+      "Diagnostic clarification",
+      "Individualized treatment recommendations"
+    ],
+    image: "url('Flowing_thoughts.png')"
+  },
 
-    telehealth: {
-      number: "03",
-      kicker: "Florida Care",
-      title: "Telehealth Care",
-      intro:
-        "Receive thoughtful psychiatric care from a private, comfortable space. Nu Essence brings clinical support to you through secure telehealth throughout Florida.",
-      items: [
-        "Secure virtual appointments",
-        "Convenient follow-up care",
-        "Florida-wide availability",
-        "Private and confidential sessions",
-        "Designed around modern schedules"
-      ],
-      image:
-        "linear-gradient(145deg,#16191b,#0a0c0d 55%,#46331d)"
-    },
+  telehealth: {
+    number: "03",
+    kicker: "Florida Care",
+    title: "Telehealth Care",
+    intro:
+      "Receive thoughtful psychiatric care from a private, comfortable space. Nu Essence brings clinical support to you through secure telehealth throughout Florida.",
+    items: [
+      "Secure virtual appointments",
+      "Convenient follow-up care",
+      "Florida-wide availability",
+      "Private and confidential sessions",
+      "Designed around modern schedules"
+    ],
+    image: "url('telehealth_care.png')"
+  },
 
-    anxiety: {
-      number: "04",
-      kicker: "Whole-Person Care",
-      title: "Anxiety & Depression Care",
-      intro:
-        "Anxiety and depression can influence nearly every part of life. Treatment begins with understanding the whole picture and creating a plan designed around you.",
-      items: [
-        "Comprehensive psychiatric evaluation",
-        "Anxiety and mood assessment",
-        "Evidence-based treatment planning",
-        "Medication management when appropriate",
-        "Ongoing monitoring and support"
-      ],
-      image:
-        "linear-gradient(145deg,#17181a,#0b0c0e 55%,#594329)"
-    }
-
+  anxiety: {
+    number: "04",
+    kicker: "Whole-Person Care",
+    title: "Anxiety & Depression Care",
+    intro:
+      "Anxiety and depression can influence nearly every part of life. Treatment begins with understanding the whole picture and creating a plan designed around you.",
+    items: [
+      "Comprehensive psychiatric evaluation",
+      "Anxiety and mood assessment",
+      "Evidence-based treatment planning",
+      "Medication management when appropriate",
+      "Ongoing monitoring and support"
+    ],
+    image: "url('Depression.png')"
+  }
   };
 
 
