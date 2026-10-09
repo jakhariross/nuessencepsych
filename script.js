@@ -65,3 +65,228 @@ console.log("Nu Essence Psychiatry homepage loaded.");
   });
 
 })();
+
+
+/* =========================================================
+   BOUTIQUE SERVICE MODAL
+   ========================================================= */
+
+(function () {
+
+  const modal =
+    document.querySelector("#serviceModal");
+
+  if (!modal) return;
+
+  const cards =
+    document.querySelectorAll(".service-reveal");
+
+  const closeButton =
+    modal.querySelector(".service-modal-close");
+
+  const backdrop =
+    modal.querySelector(".service-modal-backdrop");
+
+  const image =
+    modal.querySelector(".service-modal-image");
+
+  const number =
+    modal.querySelector("#serviceModalNumber");
+
+  const kicker =
+    modal.querySelector("#serviceModalKicker");
+
+  const title =
+    modal.querySelector("#serviceModalTitle");
+
+  const intro =
+    modal.querySelector("#serviceModalIntro");
+
+  const list =
+    modal.querySelector("#serviceModalList");
+
+
+  const services = {
+
+    medication: {
+      number: "01",
+      kicker: "Psychiatric Care",
+      title: "Medication Management",
+      intro:
+        "Medication should support your life, not define it. Nu Essence provides thoughtful, individualized psychiatric medication management built around your symptoms, goals, response, and overall well-being.",
+      items: [
+        "Comprehensive medication review",
+        "Individualized treatment planning",
+        "Ongoing effectiveness monitoring",
+        "Side-effect and medication concerns",
+        "Thoughtful follow-up and adjustment"
+      ],
+      image:
+        "linear-gradient(145deg,#17191b,#090a0b 55%,#3a2919)"
+    },
+
+    adhd: {
+      number: "02",
+      kicker: "Assessment",
+      title: "ADHD Evaluations",
+      intro:
+        "Understanding attention, focus, and executive function starts with a careful evaluation. Our approach looks beyond a checklist to understand how symptoms affect your daily life.",
+      items: [
+        "Detailed clinical assessment",
+        "Attention and executive-function concerns",
+        "Personal and symptom history",
+        "Diagnostic clarification",
+        "Individualized treatment recommendations"
+      ],
+      image:
+        "linear-gradient(145deg,#101315,#1c1813 55%,#6b4b27)"
+    },
+
+    telehealth: {
+      number: "03",
+      kicker: "Florida Care",
+      title: "Telehealth Care",
+      intro:
+        "Receive thoughtful psychiatric care from a private, comfortable space. Nu Essence brings clinical support to you through secure telehealth throughout Florida.",
+      items: [
+        "Secure virtual appointments",
+        "Convenient follow-up care",
+        "Florida-wide availability",
+        "Private and confidential sessions",
+        "Designed around modern schedules"
+      ],
+      image:
+        "linear-gradient(145deg,#16191b,#0a0c0d 55%,#46331d)"
+    },
+
+    anxiety: {
+      number: "04",
+      kicker: "Whole-Person Care",
+      title: "Anxiety & Depression Care",
+      intro:
+        "Anxiety and depression can influence nearly every part of life. Treatment begins with understanding the whole picture and creating a plan designed around you.",
+      items: [
+        "Comprehensive psychiatric evaluation",
+        "Anxiety and mood assessment",
+        "Evidence-based treatment planning",
+        "Medication management when appropriate",
+        "Ongoing monitoring and support"
+      ],
+      image:
+        "linear-gradient(145deg,#17181a,#0b0c0e 55%,#594329)"
+    }
+
+  };
+
+
+  function openService(serviceKey) {
+
+    const service =
+      services[serviceKey];
+
+    if (!service) return;
+
+
+    number.textContent =
+      service.number;
+
+    kicker.textContent =
+      service.kicker;
+
+    title.textContent =
+      service.title;
+
+    intro.textContent =
+      service.intro;
+
+
+    list.innerHTML = "";
+
+    service.items.forEach(function (item) {
+
+      const li =
+        document.createElement("li");
+
+      li.textContent =
+        item;
+
+      list.appendChild(li);
+
+    });
+
+
+    image.style.background =
+      service.image;
+
+
+    modal.classList.add("is-open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  function closeService() {
+
+    modal.classList.remove("is-open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+
+  cards.forEach(function (card) {
+
+    card.addEventListener(
+      "click",
+      function () {
+
+        openService(
+          card.dataset.service
+        );
+
+      }
+    );
+
+  });
+
+
+ if (closeButton) {
+  closeButton.addEventListener(
+    "click",
+    closeService
+  );
+}
+
+if (backdrop) {
+  backdrop.addEventListener(
+    "click",
+    closeService
+  );
+}
+
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (event.key === "Escape") {
+        closeService();
+      }
+
+    }
+  );
+
+})();
