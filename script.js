@@ -513,3 +513,360 @@ if (backdrop) {
   );
 
 })();
+
+
+/* =========================================================
+   BLOG ARTICLE MODAL
+   ========================================================= */
+
+(function () {
+
+  const modal =
+    document.querySelector("#blogModal");
+
+  if (!modal) return;
+
+
+  const cards =
+    document.querySelectorAll(".blog-reveal");
+
+  const closeButton =
+    modal.querySelector(".blog-modal-close");
+
+  const backdrop =
+    modal.querySelector(".blog-modal-backdrop");
+
+  const category =
+    modal.querySelector("#blogModalCategory");
+
+  const title =
+    modal.querySelector("#blogModalTitle");
+
+  const lead =
+    modal.querySelector("#blogModalLead");
+
+  const body =
+    modal.querySelector("#blogModalBody");
+
+
+  const articles = {
+
+    "adhd-evaluation": {
+
+      category:
+        "ADHD",
+
+      title:
+        "What an ADHD evaluation actually looks at",
+
+      lead:
+        "An ADHD evaluation looks at more than whether someone feels distracted or has trouble focusing.",
+
+      sections: [
+
+        {
+          heading:
+            "The bigger picture matters",
+
+          text:
+            "A thoughtful evaluation considers when symptoms began, how consistently they appear, and how they affect daily life. Attention difficulties can look different from person to person, so context matters."
+        },
+
+        {
+          heading:
+            "Function is an important part of the story",
+
+          text:
+            "Your provider may ask about work, school, relationships, organization, time management, forgetfulness, impulsivity, emotional regulation, and completing everyday responsibilities."
+        },
+
+        {
+          heading:
+            "Other contributors should be considered",
+
+          text:
+            "Sleep problems, anxiety, depression, stress, medical conditions, substance use, and certain medications can sometimes create symptoms that overlap with ADHD."
+        },
+
+        {
+          heading:
+            "History helps clarify patterns",
+
+          text:
+            "Childhood experiences, previous school or work difficulties, family history, and past treatment can all help your provider understand whether symptoms reflect a long-standing pattern."
+        },
+
+        {
+          heading:
+            "The goal is clarity",
+
+          text:
+            "The purpose of an evaluation is not simply to apply a label. It is to better understand what may be contributing to your symptoms and identify appropriate next steps."
+        }
+
+      ]
+
+    },
+
+
+    "medication-tracking": {
+
+      category:
+        "MEDICATION",
+
+      title:
+        "What to track between medication visits",
+
+      lead:
+        "The time between appointments can provide valuable information about how a medication is affecting your symptoms and daily life.",
+
+      sections: [
+
+        {
+          heading:
+            "Notice what is improving",
+
+          text:
+            "Pay attention to changes in mood, anxiety, focus, sleep, motivation, energy, irritability, or other symptoms connected to your treatment goals."
+        },
+
+        {
+          heading:
+            "Track side effects",
+
+          text:
+            "Write down new or uncomfortable changes such as nausea, headaches, appetite changes, sleep difficulty, restlessness, fatigue, or other concerns."
+        },
+
+        {
+          heading:
+            "Look for patterns",
+
+          text:
+            "It can be helpful to notice when medication is taken, when benefits seem strongest, when they seem to fade, and whether symptoms change at certain times of day."
+        },
+
+        {
+          heading:
+            "Consistency matters",
+
+          text:
+            "Let your provider know if doses were missed, skipped, taken at different times, or stopped. This information can help make follow-up decisions more accurate."
+        },
+
+        {
+          heading:
+            "Bring questions with you",
+
+          text:
+            "If something feels unclear, write it down before your appointment. A follow-up visit is a good time to discuss benefits, concerns, expectations, and possible treatment adjustments."
+        }
+
+      ]
+
+    },
+
+
+    "daily-function": {
+
+      category:
+        "MENTAL HEALTH",
+
+      title:
+        "When symptoms begin affecting daily function",
+
+      lead:
+        "Mental health symptoms often become more meaningful clinically when they begin interfering with the way you live, work, connect, or care for yourself.",
+
+      sections: [
+
+        {
+          heading:
+            "Work and school",
+
+          text:
+            "Difficulty concentrating, completing tasks, arriving on time, staying organized, or keeping up with responsibilities can provide important information about symptom severity."
+        },
+
+        {
+          heading:
+            "Sleep and routine",
+
+          text:
+            "Changes in sleep, energy, motivation, appetite, hygiene, exercise, or daily structure can sometimes signal that symptoms are having a broader impact."
+        },
+
+        {
+          heading:
+            "Relationships",
+
+          text:
+            "Withdrawal, irritability, conflict, feeling overwhelmed, or difficulty staying connected with others can be important parts of the clinical picture."
+        },
+
+        {
+          heading:
+            "Enjoyment and motivation",
+
+          text:
+            "Losing interest in activities, avoiding responsibilities, or struggling to start tasks that once felt manageable may be worth discussing with a mental health provider."
+        },
+
+        {
+          heading:
+            "You do not have to wait for a crisis",
+
+          text:
+            "Seeking support does not require symptoms to become unbearable. Changes in daily functioning can be a useful signal that it may be time to talk with a qualified professional."
+        }
+
+      ]
+
+    }
+
+  };
+
+
+  function openArticle(articleKey) {
+
+    const article =
+      articles[articleKey];
+
+    if (!article) return;
+
+
+    category.textContent =
+      article.category;
+
+    title.textContent =
+      article.title;
+
+    lead.textContent =
+      article.lead;
+
+
+    body.innerHTML = "";
+
+
+    article.sections.forEach(function (section) {
+
+      const sectionBlock =
+        document.createElement("section");
+
+      sectionBlock.classList.add(
+        "blog-article-section"
+      );
+
+
+      const heading =
+        document.createElement("h3");
+
+      heading.textContent =
+        section.heading;
+
+
+      const paragraph =
+        document.createElement("p");
+
+      paragraph.textContent =
+        section.text;
+
+
+      sectionBlock.appendChild(
+        heading
+      );
+
+      sectionBlock.appendChild(
+        paragraph
+      );
+
+      body.appendChild(
+        sectionBlock
+      );
+
+    });
+
+
+    modal.classList.add("is-open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  function closeArticle() {
+
+    modal.classList.remove("is-open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+
+  cards.forEach(function (card) {
+
+    card.addEventListener(
+      "click",
+      function () {
+
+        openArticle(
+          card.dataset.article
+        );
+
+      }
+    );
+
+  });
+
+
+  if (closeButton) {
+
+    closeButton.addEventListener(
+      "click",
+      closeArticle
+    );
+
+  }
+
+
+  if (backdrop) {
+
+    backdrop.addEventListener(
+      "click",
+      closeArticle
+    );
+
+  }
+
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("is-open")
+      ) {
+        closeArticle();
+      }
+
+    }
+  );
+
+})();
+
+
+
+
