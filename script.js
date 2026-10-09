@@ -293,3 +293,223 @@ if (backdrop) {
   );
 
 })();
+
+/* =========================================================
+   RESOURCE MODAL
+   ========================================================= */
+
+(function () {
+
+  const modal =
+    document.querySelector("#resourceModal");
+
+  if (!modal) return;
+
+
+  const cards =
+    document.querySelectorAll(".resource-reveal");
+
+  const closeButton =
+    modal.querySelector(".resource-modal-close");
+
+  const backdrop =
+    modal.querySelector(".resource-modal-backdrop");
+
+  const kicker =
+    modal.querySelector("#resourceModalKicker");
+
+  const title =
+    modal.querySelector("#resourceModalTitle");
+
+  const intro =
+    modal.querySelector("#resourceModalIntro");
+
+  const list =
+    modal.querySelector("#resourceModalList");
+
+
+  const resources = {
+
+    "first-appointment": {
+
+      kicker:
+        "Patient Preparation",
+
+      title:
+        "Preparing for Your First Appointment",
+
+      intro:
+        "A little preparation can make your first visit more productive and help your provider better understand what you have been experiencing.",
+
+      items: [
+        "Bring a current list of medications and supplements",
+        "Write down your main symptoms and when they began",
+        "Think about what you would most like help with",
+        "Have relevant medical and psychiatric history available",
+        "Prepare questions you want to discuss",
+        "Have insurance, identification, and pharmacy information ready"
+      ]
+
+    },
+
+
+    "medication-followup": {
+
+      kicker:
+        "Medication Care",
+
+      title:
+        "Understanding Medication Follow-Ups",
+
+      intro:
+        "Medication follow-up visits help your provider understand how treatment is working and whether changes may be helpful.",
+
+      items: [
+        "Discuss changes in symptoms since your last visit",
+        "Review how consistently medication has been taken",
+        "Talk about possible side effects or concerns",
+        "Review sleep, appetite, mood, focus, and energy",
+        "Discuss any new medications or supplements",
+        "Ask questions before making medication changes"
+      ]
+
+    },
+
+
+    "telehealth-checklist": {
+
+      kicker:
+        "Virtual Care",
+
+      title:
+        "Telehealth Visit Checklist",
+
+      intro:
+        "Preparing your space and technology ahead of time can help your telehealth appointment feel private, comfortable, and uninterrupted.",
+
+      items: [
+        "Choose a quiet and private location",
+        "Check your internet connection before the visit",
+        "Test your camera, microphone, and speakers",
+        "Keep your device charged or plugged in",
+        "Have your medication list and questions nearby",
+        "Avoid driving or multitasking during your appointment"
+      ]
+
+    }
+
+  };
+
+
+  function openResource(resourceKey) {
+
+    const resource =
+      resources[resourceKey];
+
+    if (!resource) return;
+
+
+    kicker.textContent =
+      resource.kicker;
+
+    title.textContent =
+      resource.title;
+
+    intro.textContent =
+      resource.intro;
+
+
+    list.innerHTML = "";
+
+    resource.items.forEach(function (item) {
+
+      const li =
+        document.createElement("li");
+
+      li.textContent =
+        item;
+
+      list.appendChild(li);
+
+    });
+
+
+    modal.classList.add("is-open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  function closeResource() {
+
+    modal.classList.remove("is-open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+
+  cards.forEach(function (card) {
+
+    card.addEventListener(
+      "click",
+      function () {
+
+        openResource(
+          card.dataset.resource
+        );
+
+      }
+    );
+
+  });
+
+
+  if (closeButton) {
+
+    closeButton.addEventListener(
+      "click",
+      closeResource
+    );
+
+  }
+
+
+  if (backdrop) {
+
+    backdrop.addEventListener(
+      "click",
+      closeResource
+    );
+
+  }
+
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("is-open")
+      ) {
+        closeResource();
+      }
+
+    }
+  );
+
+})();
