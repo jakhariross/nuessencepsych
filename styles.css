@@ -1396,8 +1396,9 @@ body.home-page .trust-card h3 {
   background:
     linear-gradient(
       to top,
-      rgba(5, 6, 7, 0.88),
-      transparent 65%
+      rgba(5, 6, 7, 0.96) 0%,
+      rgba(5, 6, 7, 0.45) 22%,
+      transparent 48%
     );
 }
 
