@@ -170,6 +170,7 @@ console.log("Nu Essence Psychiatry homepage loaded.");
       "Ongoing monitoring and support"
     ],
     image: "url('Depression.png')"
+    imageSize: "88%"
   }
   };
 
@@ -210,8 +211,11 @@ console.log("Nu Essence Psychiatry homepage loaded.");
     });
 
 
-    image.style.background =
-      service.image;
+    image.style.backgroundImage =
+  service.image;
+
+image.style.backgroundSize =
+  service.imageSize || "contain";
 
 
     modal.classList.add("is-open");
