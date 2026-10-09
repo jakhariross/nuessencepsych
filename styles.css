@@ -1381,21 +1381,11 @@ body.home-page .trust-card h3 {
 
   min-height: 570px;
 
-  background:
-    radial-gradient(
-      circle at 30% 22%,
-      rgba(227, 180, 104, 0.35),
-      transparent 28%
-    ),
-    linear-gradient(
-      145deg,
-      #17191b 0%,
-      #090a0b 55%,
-      #302417 100%
-    );
 
-  background-size: cover;
-  background-position: center;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+
 }
 
 .service-image-overlay {
